@@ -49,7 +49,6 @@ var selected_skills = []
 var things_in_interact_range = []
 
 onready var game = get_node("/root/Game")
-onready var camera = $Camera2D
 onready var nav_map = get_parent()
 onready var animation = $Body
 onready var head_animation = $Head
@@ -64,6 +63,7 @@ onready var stat_screen = game.get_node("CanvasLayer/UI/StatScreen")
 onready var rng = RandomNumberGenerator.new()
 
 var skills = []
+var time_since_last_tick = 0
 
 func _ready():
 	for stat in StatData.stat_data:
@@ -75,10 +75,16 @@ func _ready():
 		self.selected_skills.append(self.action_bar_skills[skill])
 
 func _process(delta):
+	self.time_since_last_tick += delta
+	if self.time_since_last_tick >= 1:
+		self.time_since_last_tick = 0
+		self.per_second_effects_tick()
+	
 	if len(self.action_queue) > 0:
 		self.lmb_pressed = false
 		self.location = self.action_queue[2].global_position
 		self.state = self.STATE.Walking
+		return
 	if self.lmb_pressed:
 		if self.can_strike:
 			var space_state = self.get_world_2d().direct_space_state
@@ -161,6 +167,16 @@ func queue_action(action, object, interact_checker):
 	self.action_queue.append(action)
 	self.action_queue.append(object)
 	self.action_queue.append(interact_checker)
+
+func restore_mana(amount):
+	self.current_mana += amount
+	if self.current_mana > self.stats["Mana"].value:
+		self.current_mana = self.stats["Mana"].value
+	self.update_mana_orb()
+
+func per_second_effects_tick():
+	self.on_heal(self.stats["HealthRegen"].value)
+	self.restore_mana(self.stats["ManaRegen"].value)
 
 func pickup(item):
 	self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.get_global_mouse_position()).normalized())
@@ -275,6 +291,10 @@ func _on_MeleeArea_body_entered(body):
 	body.get_parent().on_hit(self.damage("Physical"))
 
 func use_skill(pressed_slot):
+	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
+	if mana_cost > self.current_mana:
+		return
+	
 	self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.get_global_mouse_position()).normalized())
 	self.animation_tree.set("parameters/Casting/blend_position", self.global_position.direction_to(self.get_global_mouse_position()).normalized())
 	self.state = STATE.Casting
@@ -319,6 +339,7 @@ func use_skill(pressed_slot):
 
 	# print($TurnAxis.get_angle_to(get_global_mouse_position()))
 	self.animation_mode.travel("Casting")
+	self.lose_mana(mana_cost)
 	yield(self.get_tree().create_timer(skill_instance.skill_cast_time), "timeout")
 	self.can_cast = true
 	self.MAX_SPEED = 180

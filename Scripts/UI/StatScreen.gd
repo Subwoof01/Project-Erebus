@@ -36,7 +36,6 @@ var alt_pressed = false
 var stats = {}
 
 func _ready():
-
 	var phys = Label.new()
 	phys.text = "Physical Damage"
 	phys.theme = self.font

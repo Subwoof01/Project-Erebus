@@ -3,7 +3,7 @@ class_name Enemy
 
 enum STATE {
 	Idle,
-	Walking,
+	Wandering,
 	Casting,
 	Attacking,
 	Searching,
@@ -40,11 +40,12 @@ var is_player_in_range = false
 var is_player_in_sight = false
 var is_player_in_strike_range = false
 var is_player_seen = false
-var destination = self.global_position
+onready var destination = self.global_position
 
 var can_heal = true
 
-var tmp_time = 0
+var time_passed_since_idle = 0
+var time_between_wanders = 3
 
 func _ready():
 	self.current_health = self.max_health
@@ -52,21 +53,24 @@ func _ready():
 	self.sprite.material = self.shader_material
 
 func _process(delta):
-	self.tmp_time += delta
-	if self.tmp_time >= 1:
-		print(str(self) + ": " + str(STATE.keys()[self.state]))
-		self.tmp_time = 0
 	if self.state == STATE.Dead:
 		return
 	match self.state:
 		STATE.Idle:
 			self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.destination).normalized())
 			self.animation_mode.travel("Idle")
+			self.time_passed_since_idle += delta
+			if self.time_passed_since_idle >= self.time_between_wanders:
+				self.time_passed_since_idle = 0
+				self.destination = self.nav_map.get_closest_point(Mathf.randv_circle(self.sight_range.get_child(0).shape.radius * 0.5, self.sight_range.get_child(0).shape.radius))
+				self.state = STATE.Wandering
+		STATE.Wandering:
+			self.animation_mode.travel("Walking")
+			self.wander(delta)
 		STATE.Attacking:			
 			self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.player.global_position).normalized())
 			self.attack()
-		STATE.Searching:		
-			self.animation_tree.set("parameters/Walking/blend_position", self.global_position.direction_to(self.destination).normalized())
+		STATE.Searching:
 			self.animation_mode.travel("Walking")
 			self.search(delta)
 		
@@ -117,13 +121,19 @@ func _on_StrikeRange_body_exited(body):
 	if body == self.player:
 		self.is_player_in_strike_range = false
 
-func search(delta):
+func wander(delta):
+	var path = self.move(delta)
+	if path.size() == 0:
+		self.state = STATE.Idle
+
+func move(delta) -> PoolVector2Array:
 	var path_to_destination = self.nav_map.get_simple_path(self.global_position, self.destination)
 	var starting_point = self.global_position
 	var move_distance = self.speed * delta
-
+	
 	for point in range(path_to_destination.size()):
 		var distance_to_next_point = starting_point.distance_to(path_to_destination[0])
+		self.animation_tree.set("parameters/Walking/blend_position", self.global_position.direction_to(path_to_destination[0]).normalized())
 		if move_distance <= distance_to_next_point:
 			var move_direction = self.get_angle_to(starting_point.linear_interpolate(path_to_destination[0], move_distance / distance_to_next_point))
 			var motion = Vector2(speed, 0).rotated(move_direction)
@@ -132,8 +142,12 @@ func search(delta):
 		move_distance -= distance_to_next_point
 		starting_point = path_to_destination[0]
 		path_to_destination.remove(0)
-	
-	if path_to_destination.size() == 0:
+
+	return path_to_destination
+
+func search(delta):
+	var path = self.move(delta)
+	if path.size() == 0:
 		self.is_player_seen = false
 		self.state = STATE.Idle
 
