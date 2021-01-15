@@ -1,0 +1,71 @@
+{
+  "Health": {
+    "StatBaseValue": 100
+  },
+  "Mana": {
+    "StatBaseValue": 50
+  },
+  "Strength": {
+    "StatBaseValue": 3
+  },
+  "Dexterity": {
+    "StatBaseValue": 3
+  },
+  "Intelligence": {
+    "StatBaseValue": 3
+  },
+  "Armour": {
+    "StatBaseValue": 10
+  },
+  "PhysicalDamageMin": {
+    "StatBaseValue": 1
+  },
+  "PhysicalDamageMax": {
+    "StatBaseValue": 2
+  },
+  "PhysicalDamage": {
+    "StatBaseValue": 0
+  },
+  "CriticalHitChance": {
+    "StatBaseValue": 100
+  },
+  "CriticalHitDamage": {
+    "StatBaseValue": 1.5
+  },
+  "FireDamage": {
+    "StatBaseValue": 0
+  },
+  "FrostDamage": {
+    "StatBaseValue": 0
+  },
+  "LightningDamage": {
+    "StatBaseValue": 0
+  },
+  "NatureDamage": {
+    "StatBaseValue": 0
+  },
+  "BlockChance": {
+    "StatBaseValue": 0
+  },
+  "FireResistance": {
+    "StatBaseValue": 0
+  },
+  "FrostResistance": {
+    "StatBaseValue": 0
+  },
+  "LightningResistance": {
+    "StatBaseValue": 0
+  },
+  "NatureResistance": {
+    "StatBaseValue": 0
+  },
+  "HealthRegen": {
+    "StatBaseValue": 0
+  },
+  "ManaRegen": {
+    "StatBaseValue": 0
+  },
+  "MovementSpeed": {
+    "StatBaseValue": 0
+  }
+}

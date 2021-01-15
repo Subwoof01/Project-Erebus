@@ -1,0 +1,54 @@
+{
+  "Ice_Spear": {
+    "SkillType": "RangedSingleTargetSkill",
+    "SkillDamage": 50,
+    "SkillProjectileSpeed": 200,
+    "SkillRadius": "N/A",
+    "SkillDamageDelayTime": "N/A",
+    "SkillRemoveDelayTime": "N/A",
+    "SkillCastTime": 0.4,
+    "SkillExpansionTime": "N/A",
+    "SkillHeal": "N/A",
+    "SkillProjectileAcceleration": 0.04,
+    "SkillProjectileDelay": 0.25
+  },
+  "Earthquake": {
+    "SkillType": "RangedAoESkill",
+    "SkillDamage": 80,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": 90,
+    "SkillDamageDelayTime": 0.3,
+    "SkillRemoveDelayTime": 3,
+    "SkillCastTime": 0.4,
+    "SkillExpansionTime": "N/A",
+    "SkillHeal": "N/A",
+    "SkillProjectileAcceleration": "N/A",
+    "SkillProjectileDelay": "N/A"
+  },
+  "Ice_Nova": {
+    "SkillType": "ExpandingAoESkill",
+    "SkillDamage": 80,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": 200,
+    "SkillDamageDelayTime": "N/A",
+    "SkillRemoveDelayTime": "N/A",
+    "SkillCastTime": 0.4,
+    "SkillExpansionTime": 0.45,
+    "SkillHeal": "N/A",
+    "SkillProjectileAcceleration": "N/A",
+    "SkillProjectileDelay": "N/A"
+  },
+  "Healing_Word": {
+    "SkillType": "SingleTargetHeal",
+    "SkillDamage": "N/A",
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillDamageDelayTime": "N/A",
+    "SkillRemoveDelayTime": "N/A",
+    "SkillCastTime": 0.4,
+    "SkillExpansionTime": "N/A",
+    "SkillHeal": 50,
+    "SkillProjectileAcceleration": "N/A",
+    "SkillProjectileDelay": "N/A"
+  }
+}

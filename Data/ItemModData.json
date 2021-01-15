@@ -1,0 +1,290 @@
+{
+  "Mod": [
+    {
+      "Id": 0,
+      "Name": "Jagged",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Weapon",
+      "MainStat": "Strength",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "EnhancedDamage": [
+            "Add",
+            0.12,
+            0.15
+          ]
+        },
+        {
+          "PhysicalDamage": [
+            "Mult",
+            0.04,
+            0.09
+          ]
+        },
+        {
+          "CriticalHitChance": [
+            "Add",
+            0.12,
+            0.16
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 1,
+      "Name": "of Fire",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Weapon",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "FireDamage": [
+        4,
+        6,
+        8,
+        9
+      ],
+      "Mods": [
+        {
+          "FireDamage": [
+            "Mult",
+            0.08,
+            0.12
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 2,
+      "Name": "Sturdy",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Strength",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "EnhancedArmour": [
+            "Add",
+            0.5,
+            0.6
+          ]
+        },
+        {
+          "IncreasedArmour": [
+            "Add",
+            0.19,
+            0.23
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 3,
+      "Name": "of Fire",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FireResistance": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 4,
+      "Name": "NONE",
+      "Type": "Implicit",
+      "ImplicitBaseItem": "Breastplate",
+      "ItemLevel": 1,
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "LightningResistance": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 5,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Weapon",
+      "MainStat": "Strength",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "CriticalHitDamage": [
+            "Add",
+            0.23,
+            0.56
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 6,
+      "Name": "of Heat",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FireResistance": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 7,
+      "Name": "Frozen",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FrostResistance": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 8,
+      "Name": "Studded",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Shield",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "FlatArmour": [
+            "Flat",
+            11,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 9,
+      "Name": "of the Cloud",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Shield",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "LightningResistance": [
+            "Flat",
+            0.04,
+            0.08
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 10,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Shield",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "BlockChance": [
+            "Add",
+            0.15,
+            0.65
+          ]
+        },
+        {
+          "FlatHealth": [
+            "Flat",
+            11,
+            46
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 11,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Dexterity",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "MovementSpeed": [
+            "Flat",
+            0.1,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 12,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Strength",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "IncreasedArmour": [
+            "Add",
+            0.05,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 13,
+      "Name": "NONE",
+      "Type": "Implicit",
+      "ImplicitBaseItem": "Lapis Amulet",
+      "ItemLevel": 1,
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "Intelligence": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    }
+  ]
+}
