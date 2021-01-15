@@ -1260,6 +1260,8 @@ radius = 45.0
 "Player",
 ]]
 scale = Vector2( 0.3, 0.3 )
+collision_layer = 2
+collision_mask = 2147483685
 script = ExtResource( 1 )
 
 [node name="Body" type="Sprite" parent="."]
@@ -1267,12 +1269,14 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
+frame = 1
 
 [node name="Head" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
+frame = 1
 
 [node name="Weapon" type="Sprite" parent="."]
 visible = false

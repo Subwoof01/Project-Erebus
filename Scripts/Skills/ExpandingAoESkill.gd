@@ -9,8 +9,14 @@ export var expansion_time = 0.45
 var damaged_targets = []
 
 var circle_shape = preload("res://Resources/CircleShape.res")
+var origin
 
 func _ready():
+	if self.origin == "Player":
+		self.set_collision_mask_bit(1, false)
+	elif self.origin == "Enemy":
+		self.set_collision_mask_bit(2, false)
+		self.set_collision_mask_bit(4, false)
 	var skill_data = DataImport.skill_data[skill_name]
 	self.damage = skill_data.SkillDamage
 	self.radius = skill_data.SkillRadius
@@ -31,8 +37,8 @@ func aoe_attack():
 			if damaged_targets.has(target):
 				continue
 			else:
-				if target.is_in_group("Enemies"):
-					target.on_hit(self.damage)
+				if target.get_parent().is_in_group("Enemies"):
+					target.get_parent().on_hit(self.damage)
 					damaged_targets.append(target)
 		yield(self.get_tree().create_timer(0.05), "timeout")
 		continue

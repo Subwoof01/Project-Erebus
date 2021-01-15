@@ -82,10 +82,8 @@ func _process(delta):
 	if self.lmb_pressed:
 		if self.can_strike:
 			var space_state = self.get_world_2d().direct_space_state
-			var check = space_state.intersect_point(self.get_global_mouse_position(), 2, [self], 2, true)
-			# print(check)
+			var check = space_state.intersect_point(self.get_global_mouse_position(), 2, [self], 16)
 			for body in check:
-				# print("Checking body: ", body)
 				if body.collider.is_in_group("Enemies"):
 					if body.collider.get_node("Collision") in self.things_in_interact_range:
 						self.melee_strike(body.collider)
@@ -142,7 +140,6 @@ func handle_inputs():
 		self.use_skill(3)
 
 func _on_InteractRange_area_entered(area):
-	print("area added ", area)
 	if len(self.action_queue) > 0:
 		if area == self.action_queue[2]:
 			self.execute_queued_action()
@@ -155,7 +152,6 @@ func _on_InteractRange_body_entered(body):
 	if len(self.action_queue) > 0:
 		if body == self.action_queue[2]:
 			self.execute_queued_action()
-	print("body added ", body)
 	self.things_in_interact_range.append(body)
 
 func _on_InteractRange_body_exited(body):
@@ -165,6 +161,21 @@ func queue_action(action, object, interact_checker):
 	self.action_queue.append(action)
 	self.action_queue.append(object)
 	self.action_queue.append(interact_checker)
+
+func pickup(item):
+	self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.get_global_mouse_position()).normalized())
+	var click_area = item.get_node("ClickArea")
+	self.animation_mode.travel("Idle")
+	if click_area in self.things_in_interact_range:
+		self.speed = 0
+		self.MAX_SPEED = 0
+		ItemManager.pickup(item.item_data)
+		yield(self.get_tree().create_timer(0.1), "timeout")
+		self.animation_mode.travel("Idle")
+		self.MAX_SPEED = 180
+		self.state = STATE.Idle
+	else:
+		self.queue_action("pickup", item.item_data, click_area)
 
 func execute_queued_action():
 	match self.action_queue[0]:
@@ -199,14 +210,15 @@ func on_heal(heal):
 	self.current_health += heal
 	if self.current_health > self.stats["Health"].value:
 		self.current_health = self.stats["Health"].value
+	self.update_health_orb()
 
 func update_health_orb():
-	var percentage_hp = int((float(self.current_health) / self.stats["Health"]) * 100)
+	var percentage_hp = int((float(self.current_health) / self.stats["Health"].value) * 100)
 	health_tween.interpolate_property(health_orb, 'value', health_orb.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	health_tween.start()
 
 func update_mana_orb():
-	var percentage_mp = int((float(self.current_mana) / self.stats["Mana"]) * 100)
+	var percentage_mp = int((float(self.current_mana) / self.stats["Mana"].value) * 100)
 	mana_tween.interpolate_property(mana_orb, 'value', mana_orb.value, percentage_mp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	mana_tween.start()
 		
@@ -260,7 +272,7 @@ func melee_strike(target=null):
 	self.MAX_SPEED = 180
 
 func _on_MeleeArea_body_entered(body):
-	body.on_hit(self.damage("Physical"))
+	body.get_parent().on_hit(self.damage("Physical"))
 
 func use_skill(pressed_slot):
 	self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.get_global_mouse_position()).normalized())
@@ -283,18 +295,21 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.rotation = $Center.get_angle_to(get_global_mouse_position())
 			skill_instance.position = $TurnAxis/CastPoint.global_position
+			skill_instance.origin = "Player"
 			self.get_parent().add_child(skill_instance)
 		"RangedAoESkill":
 			skill = load("res://Scenes/Skills/RangedAoESkill.tscn")
 			skill_instance = skill.instance()
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.get_global_mouse_position()
+			skill_instance.origin = "Player"
 			self.get_parent().add_child(skill_instance)
 		"ExpandingAoESkill":
 			skill = load("res://Scenes/Skills/ExpandingAoESkill.tscn")
 			skill_instance = skill.instance()
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.global_position
+			skill_instance.origin = "Player"
 			self.get_parent().add_child(skill_instance)
 		"SingleTargetHeal":
 			skill = load("res://Scenes/Skills/SingleTargetHeal.tscn")
