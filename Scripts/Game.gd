@@ -20,7 +20,7 @@ func _process(delta):
 	if self.current_mouse_over_target != null:
 		self.set_ui_health_bar_info()
 	var screen_space = self.get_world_2d().direct_space_state
-	var ray_cast = screen_space.intersect_point(self.get_global_mouse_position(), 1, [self.player], 2)
+	var ray_cast = screen_space.intersect_point(self.get_global_mouse_position(), 1, [self.player], 16)
 	for body in ray_cast:
 		if body.collider.is_in_group("Enemies"):
 			self.current_mouse_over_target = body.collider

@@ -9,8 +9,9 @@
     "SkillCastTime": 0.4,
     "SkillExpansionTime": "N/A",
     "SkillHeal": "N/A",
-    "SkillProjectileAcceleration": 0.04,
-    "SkillProjectileDelay": 0.25
+    "SkillProjectileAcceleration": 0.05,
+    "SkillProjectileDelay": 0.25,
+    "SkillManaCost": 5
   },
   "Earthquake": {
     "SkillType": "RangedAoESkill",
@@ -23,7 +24,8 @@
     "SkillExpansionTime": "N/A",
     "SkillHeal": "N/A",
     "SkillProjectileAcceleration": "N/A",
-    "SkillProjectileDelay": "N/A"
+    "SkillProjectileDelay": "N/A",
+    "SkillManaCost": 15
   },
   "Ice_Nova": {
     "SkillType": "ExpandingAoESkill",
@@ -36,7 +38,8 @@
     "SkillExpansionTime": 0.45,
     "SkillHeal": "N/A",
     "SkillProjectileAcceleration": "N/A",
-    "SkillProjectileDelay": "N/A"
+    "SkillProjectileDelay": "N/A",
+    "SkillManaCost": 30
   },
   "Healing_Word": {
     "SkillType": "SingleTargetHeal",
@@ -49,6 +52,7 @@
     "SkillExpansionTime": "N/A",
     "SkillHeal": 50,
     "SkillProjectileAcceleration": "N/A",
-    "SkillProjectileDelay": "N/A"
+    "SkillProjectileDelay": "N/A",
+    "SkillManaCost": 10
   }
 }

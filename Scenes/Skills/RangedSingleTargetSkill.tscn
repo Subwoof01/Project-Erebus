@@ -44,8 +44,8 @@ animations = [ {
 } ]
 
 [node name="RangedSingleTargetSkill" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 2147483698
 mass = 0.00102041
 gravity_scale = 0.0
 contacts_reported = 1
@@ -56,7 +56,7 @@ script = ExtResource( 2 )
 skill_name = "Ice_Spear"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
+position = Vector2( 6.0172, 0 )
 polygon = PoolVector2Array( -8.18633, -4.42373, 13.5572, 1.94023, -8.36311, 8.12741 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
