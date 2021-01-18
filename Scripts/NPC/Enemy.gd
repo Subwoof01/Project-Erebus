@@ -13,6 +13,8 @@ enum STATE {
 const ACCELERATION = 45
 const MAX_SPEED = 120
 
+
+onready var floating_text = preload("res://Scenes/UI/FloatingText.tscn")
 onready var animation_tree = $AnimationTree
 onready var animation_mode = animation_tree.get("parameters/playback")
 onready var animation_player = $AnimationPlayer
@@ -172,6 +174,9 @@ func on_hit(damage):
 	self.current_health -= damage
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
+	var text = self.floating_text.instance()
+	text.amount = damage
+	self.add_child(text)
 	if (current_health <= 0):
 		self.on_death()
 		return

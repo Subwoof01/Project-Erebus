@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Sprites/Light.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/NPC/Skeleton.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Sprites/UI/HealthBar/Style_1.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/UI/Fonts/dum1.ttf" type="DynamicFontData" id=24]
 [ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=25]
+[ext_resource path="res://Resources/UI_Font_22.tres" type="Theme" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
@@ -184,6 +185,21 @@ margin_top = 500.0
 margin_right = 1270.0
 margin_bottom = 710.0
 texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaLabel" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay"]
+margin_left = 1060.0
+margin_top = 459.0
+margin_right = 1270.0
+margin_bottom = 486.0
+grow_horizontal = 0
+theme = ExtResource( 26 )
+text = "CURRENT/MAX"
+align = 1
+valign = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -444,6 +460,18 @@ texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/UI/HealthOrb"]
+margin_left = 10.0
+margin_top = -32.0
+margin_right = 220.0
+margin_bottom = -5.0
+grow_horizontal = 0
+theme = ExtResource( 26 )
+text = "CURRENT/MAX"
+align = 1
+valign = 1
+clip_text = true
 
 [node name="Experience" type="Control" parent="CanvasLayer/UI"]
 margin_left = 293.044
