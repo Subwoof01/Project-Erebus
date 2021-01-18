@@ -6,6 +6,8 @@ export var animation = "Earthquake"
 export var damage_delay_time = 0.3
 export var remove_delay_time = 0.5
 export var skill_cast_time = 0.4
+var damage_type = ""
+var crit = false
 
 var origin
 
@@ -31,7 +33,7 @@ func aoe_attack():
 	var targets = self.get_overlapping_bodies()
 	for target in targets:
 		if target.get_parent().is_in_group("Enemies"):
-			target.get_parent().on_hit(self.damage)
+			target.get_parent().on_hit(self.damage, self.damage_type, crit)
 		elif target.is_in_group("Player"):
 			target.take_damage(self.damage)
 	yield(self.get_tree().create_timer(self.remove_delay_time), "timeout")

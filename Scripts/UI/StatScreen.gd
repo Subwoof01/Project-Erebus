@@ -49,13 +49,9 @@ func _ready():
 	self.damage_names.add_child(phys)
 	self.damage_values.add_child(phys_val)
 
-	var count = 0
 	var text_width = 0
 	var names = []
 	for stat in self.player.stats:
-		count += 1
-		if count <= 8:
-			continue
 		
 		var value = Label.new()
 		value.theme = self.font
@@ -83,6 +79,12 @@ func _ready():
 			"CriticalHitDamage":
 				type = "Damage"
 				label.text = "Critical Hit Damage"
+			"PhysicalDamage":
+				type = "Damage"
+				label.text = "to Physical Damage"
+			"SpellDamage":
+				type = "Damage"
+				label.text = "to Spell Damage"
 			"FireDamage":
 				type = "Damage"
 				label.text = "to Fire Damage"
@@ -98,6 +100,9 @@ func _ready():
 			"PhysicalDamage":
 				type = "Damage"
 				label.text = "to Physical Damage"
+			"Armour":
+				type = "Defense"
+				label.text = "Increased Armour"
 			"BlockChance":
 				type = "Defense"
 				label.text = "Block Chance"
@@ -108,6 +113,7 @@ func _ready():
 				type = "Defense"
 				label.text = "Mana Regenerated Per Second"
 			"MovementSpeed":
+				type = "Utility"
 				label.text = "Increased Movement Speed"
 
 		match type:
@@ -117,7 +123,7 @@ func _ready():
 			"Defense":
 				self.defense_names.add_child(label)
 				self.defense_values.add_child(value)
-			_:
+			"Utility":
 				self.utility_names.add_child(label)
 				self.utility_values.add_child(value)
 		names.append(label)

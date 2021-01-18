@@ -226,8 +226,8 @@ func create_randomised_equipment(level):
 
 		var normalised = inverse_lerp(0, get_max_scalar(), self.get_stat_scalar())
 		var base_armour = rng.randi_range(
-			base_item["ItemBaseArmour"][0] * max(1, Mathf.crossfade(Mathf.smooth_start2(normalised), Mathf.smooth_stop2(normalised), normalised) * (self.scale * 3)), 
-			base_item["ItemBaseArmour"][1] * max(1, Mathf.crossfade(Mathf.smooth_start2(normalised), Mathf.smooth_stop2(normalised), normalised) * (self.scale * 3))
+			base_item["ItemBaseArmour"][0] * max(1, Mathf.crossfade(Mathf.smooth_start2(normalised), Mathf.smooth_stop2(normalised), normalised) * (self.scale * 5)), 
+			base_item["ItemBaseArmour"][1] * max(1, Mathf.crossfade(Mathf.smooth_start2(normalised), Mathf.smooth_stop2(normalised), normalised) * (self.scale * 5))
 			)
 		var a = CharacterStat.new(base_armour)
 		self.stats["Armour"] = a

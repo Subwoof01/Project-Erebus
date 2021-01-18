@@ -207,16 +207,32 @@ func execute_queued_action():
 			self.melee_strike(self.action_queue[1])
 			self.action_queue = []
 
-func damage(type):
+func get_crit_chance():
+	var crit_chance = self.stats["CriticalHitChance"].value / 10000
+	return crit_chance
+
+func damage(type, base=0):
 	# Add more damage logic here. Crit chance, other dmg types etc.
+	self.rng.randomize()
+	var is_crit = false
+	var crit_chance = self.rng.randf()
+	if crit_chance <= self.get_crit_chance():
+		is_crit = true
+	
+	self.rng.randomize()
 	var damage
 	match type:
 		"Physical":
-			self.rng.randomize()
 			damage = self.rng.randf_range(self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value)
 		_:
-			damage = 0
-	return damage
+			damage = self.rng.randf_range(base[0], base[1])
+			for t in type:
+				var d_type = t + "Damage"
+				damage *= self.stats[d_type].value
+
+	if is_crit:
+		damage *= self.stats["CriticalHitDamage"].value
+	return {"damage": damage, "crit": is_crit}
 
 
 func take_damage(damage):
@@ -226,7 +242,10 @@ func take_damage(damage):
 	self.update_health_orb()
 
 func lose_mana(cost):
-	self.current_mana -= cost;
+	self.current_mana -= cost
+	# This should never be reached, but just in case.
+	if self.current_mana <= 0:
+		self.current_mana = self.stats["Mana"].value
 	self.update_mana_orb()
 
 func on_heal(heal):
@@ -325,6 +344,10 @@ func use_skill(pressed_slot):
 			skill_instance.rotation = $Center.get_angle_to(get_global_mouse_position())
 			skill_instance.position = $TurnAxis/CastPoint.global_position
 			skill_instance.origin = "Player"
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			skill_instance.damage = damage["damage"]
+			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
+			skill_instance.crit = damage["crit"]
 			self.get_parent().add_child(skill_instance)
 		"RangedAoESkill":
 			skill = load("res://Scenes/Skills/RangedAoESkill.tscn")
@@ -332,6 +355,10 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.get_global_mouse_position()
 			skill_instance.origin = "Player"
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			skill_instance.damage = damage["damage"]
+			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
+			skill_instance.crit = damage["crit"]
 			self.get_parent().add_child(skill_instance)
 		"ExpandingAoESkill":
 			skill = load("res://Scenes/Skills/ExpandingAoESkill.tscn")
@@ -339,6 +366,10 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.global_position
 			skill_instance.origin = "Player"
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			skill_instance.damage = damage["damage"]
+			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
+			skill_instance.crit = damage["crit"]
 			self.get_parent().add_child(skill_instance)
 		"SingleTargetHeal":
 			skill = load("res://Scenes/Skills/SingleTargetHeal.tscn")

@@ -7,6 +7,8 @@ export var radius = 200
 export var skill_cast_time = 0.4
 export var expansion_time = 0.45
 var damaged_targets = []
+var damage_type = ""
+var crit = false
 
 var circle_shape = preload("res://Resources/CircleShape.res")
 var origin
@@ -38,7 +40,7 @@ func aoe_attack():
 				continue
 			else:
 				if target.get_parent().is_in_group("Enemies"):
-					target.get_parent().on_hit(self.damage)
+					target.get_parent().on_hit(self.damage, self.damage_type, crit)
 					damaged_targets.append(target)
 		yield(self.get_tree().create_timer(0.05), "timeout")
 		continue

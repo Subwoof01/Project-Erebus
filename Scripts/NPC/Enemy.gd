@@ -31,6 +31,14 @@ export var monster_name = ""
 export var max_health = 100
 export var level = 1
 export var base_exp = 100
+var defensives = { 
+	"Armour": 0,
+	"Fire": 0,
+	"Frost": 0,
+	"Lightning": 0,
+	"Nature": 0,
+	"Spell": 0
+}
 
 var shader_material
 var current_health
@@ -170,12 +178,15 @@ func on_death():
 	self.animation_mode.travel("Death")
 	self.player.gain_exp(self.base_exp, self.level)
 
-func on_hit(damage):
+func on_hit(damage, type, crit=false):
+	for t in type:
+		damage *= 1 - self.defensives[t]
 	self.current_health -= damage
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
 	var text = self.floating_text.instance()
 	text.amount = damage
+	text.is_crit = crit
 	self.add_child(text)
 	if (current_health <= 0):
 		self.on_death()

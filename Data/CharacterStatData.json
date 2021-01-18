@@ -3,7 +3,7 @@
     "StatBaseValue": 100
   },
   "Mana": {
-    "StatBaseValue": 50
+    "StatBaseValue": 500
   },
   "Strength": {
     "StatBaseValue": 3
@@ -27,22 +27,25 @@
     "StatBaseValue": 0
   },
   "CriticalHitChance": {
-    "StatBaseValue": 100
+    "StatBaseValue": 3000
   },
   "CriticalHitDamage": {
     "StatBaseValue": 1.5
   },
   "FireDamage": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "FrostDamage": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "LightningDamage": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "NatureDamage": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
+  },
+  "SpellDamage": {
+    "StatBaseValue": 1
   },
   "BlockChance": {
     "StatBaseValue": 0
@@ -60,12 +63,12 @@
     "StatBaseValue": 0
   },
   "HealthRegen": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "ManaRegen": {
-    "StatBaseValue": 1
+    "StatBaseValue": 10
   },
   "MovementSpeed": {
-    "StatBaseValue": 1
+    "StatBaseValue": 0
   }
 }

@@ -127,7 +127,7 @@ tile_data = PoolIntArray( -1245202, 11, 2, -1179651, 1, 3, -1114120, 1, 0, -1114
 [node name="Skeleton" parent="NavigationMap/YSort" instance=ExtResource( 2 )]
 position = Vector2( 1175.53, -91.8689 )
 monster_name = "Skeleton"
-max_health = 700
+max_health = 100000
 
 [node name="Player" parent="NavigationMap/YSort" instance=ExtResource( 3 )]
 position = Vector2( 210.181, 172.005 )
@@ -190,6 +190,7 @@ __meta__ = {
 }
 
 [node name="ManaLabel" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay"]
+show_behind_parent = true
 margin_left = 1060.0
 margin_top = 459.0
 margin_right = 1270.0
@@ -462,6 +463,7 @@ __meta__ = {
 }
 
 [node name="HealthLabel" type="Label" parent="CanvasLayer/UI/HealthOrb"]
+show_behind_parent = true
 margin_left = 10.0
 margin_top = -32.0
 margin_right = 220.0

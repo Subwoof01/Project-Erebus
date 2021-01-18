@@ -1,7 +1,10 @@
 {
   "Ice_Spear": {
     "SkillType": "RangedSingleTargetSkill",
-    "SkillDamage": 50,
+    "SkillDamage": [
+      80,
+      120
+    ],
     "SkillProjectileSpeed": 200,
     "SkillRadius": "N/A",
     "SkillDamageDelayTime": "N/A",
@@ -11,11 +14,18 @@
     "SkillHeal": "N/A",
     "SkillProjectileAcceleration": 0.05,
     "SkillProjectileDelay": 0.25,
-    "SkillManaCost": 5
+    "SkillManaCost": 5,
+    "SkillTags": [
+      "Spell",
+      "Frost"
+    ]
   },
   "Earthquake": {
     "SkillType": "RangedAoESkill",
-    "SkillDamage": 80,
+    "SkillDamage": [
+      50,
+      90
+    ],
     "SkillProjectileSpeed": "N/A",
     "SkillRadius": 90,
     "SkillDamageDelayTime": 0.3,
@@ -25,11 +35,18 @@
     "SkillHeal": "N/A",
     "SkillProjectileAcceleration": "N/A",
     "SkillProjectileDelay": "N/A",
-    "SkillManaCost": 15
+    "SkillManaCost": 15,
+    "SkillTags": [
+      "Spell",
+      "Nature"
+    ]
   },
   "Ice_Nova": {
     "SkillType": "ExpandingAoESkill",
-    "SkillDamage": 80,
+    "SkillDamage": [
+      60,
+      100
+    ],
     "SkillProjectileSpeed": "N/A",
     "SkillRadius": 200,
     "SkillDamageDelayTime": "N/A",
@@ -39,7 +56,11 @@
     "SkillHeal": "N/A",
     "SkillProjectileAcceleration": "N/A",
     "SkillProjectileDelay": "N/A",
-    "SkillManaCost": 30
+    "SkillManaCost": 30,
+    "SkillTags": [
+      "Spell",
+      "Frost"
+    ]
   },
   "Healing_Word": {
     "SkillType": "SingleTargetHeal",
