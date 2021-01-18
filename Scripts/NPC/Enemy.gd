@@ -32,7 +32,7 @@ export var max_health = 100
 export var level = 1
 export var base_exp = 100
 var defensives = { 
-	"Physical": 0,
+	"Armour": 0,
 	"Fire": 0,
 	"Frost": 0,
 	"Lightning": 0,
