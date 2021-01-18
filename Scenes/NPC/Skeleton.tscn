@@ -1123,6 +1123,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 32
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Cast_Bottom = SubResource( 1 )

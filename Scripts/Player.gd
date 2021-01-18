@@ -55,8 +55,10 @@ onready var head_animation = $Head
 
 onready var health_orb = game.get_node("CanvasLayer/UI/HealthOrb/Health")
 onready var health_tween = game.get_node("CanvasLayer/UI/HealthOrb/Health/Tween")
+onready var health_text = game.get_node("CanvasLayer/UI/HealthOrb/HealthLabel")
 onready var mana_orb = game.get_node("CanvasLayer/UI/ActionBarManaOverlay/Mana")
 onready var mana_tween = game.get_node("CanvasLayer/UI/ActionBarManaOverlay/Mana/Tween")
+onready var mana_text = game.get_node("CanvasLayer/UI/ActionBarManaOverlay/ManaLabel")
 onready var exp_bar = game.get_node("CanvasLayer/UI/Experience/Bar")
 onready var stat_screen = game.get_node("CanvasLayer/UI/StatScreen")
 
@@ -73,6 +75,9 @@ func _ready():
 	self.current_mana = self.stats["Mana"].value
 	for skill in self.action_bar_skills:
 		self.selected_skills.append(self.action_bar_skills[skill])
+
+	self.update_health_orb()
+	self.update_mana_orb()
 
 func _process(delta):
 	self.time_since_last_tick += delta
@@ -216,6 +221,8 @@ func damage(type):
 
 func take_damage(damage):
 	self.current_health -= damage;
+	if self.current_health <= 0:
+		self.current_health = 0
 	self.update_health_orb()
 
 func lose_mana(cost):
@@ -229,11 +236,13 @@ func on_heal(heal):
 	self.update_health_orb()
 
 func update_health_orb():
+	self.health_text.text = str(self.current_health) + "/" + str(self.stats["Health"].value)
 	var percentage_hp = int((float(self.current_health) / self.stats["Health"].value) * 100)
 	health_tween.interpolate_property(health_orb, 'value', health_orb.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	health_tween.start()
 
 func update_mana_orb():
+	self.mana_text.text = str(self.current_mana) + "/" + str(self.stats["Mana"].value)
 	var percentage_mp = int((float(self.current_mana) / self.stats["Mana"].value) * 100)
 	mana_tween.interpolate_property(mana_orb, 'value', mana_orb.value, percentage_mp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	mana_tween.start()

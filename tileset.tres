@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=77 format=2]
+[gd_resource type="TileSet" load_steps=76 format=2]
 
 [ext_resource path="res://Sprites/Tilesets/grassland_tiles.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tilesets/NavMesh.png" type="Texture" id=2]
@@ -134,10 +134,6 @@ points = PoolVector2Array( 24, 64, 28, 72, 24, 92 )
 
 [sub_resource type="ConvexPolygonShape2D" id=44]
 points = PoolVector2Array( 24, 64, 32, 76, 24, 92 )
-
-[sub_resource type="NavigationPolygon" id=74]
-vertices = PoolVector2Array( 0, 16, 32, 32, 64, 16, 32, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="ConvexPolygonShape2D" id=45]
 points = PoolVector2Array( 0, 16, 0, 16, 32, 0, 32, 16, 0, 16 )
@@ -1090,7 +1086,6 @@ points = PoolVector2Array( 62.6085, 111.613, 66.6784, 109.287, 69.0041, 112.582,
 19/tile_mode = 0
 19/occluder_offset = Vector2( 0, 0 )
 19/navigation_offset = Vector2( 0, 0 )
-19/navigation = SubResource( 74 )
 19/shape_offset = Vector2( 0, 0 )
 19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 19/shape_one_way = false
