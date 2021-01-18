@@ -8,9 +8,16 @@ export var skill_cast_time = 0.4
 export var skill_projectile_acceleration = 0
 export var skill_projectile_delay = 0
 
+var origin
+
 var accelerate = false
 
 func _ready():
+	if self.origin == "Player":
+		self.set_collision_mask_bit(1, false)
+	elif self.origin == "Enemy":
+		self.set_collision_mask_bit(2, false)
+		self.set_collision_mask_bit(4, false)
 	var skill_data = DataImport.skill_data[skill_name]
 	self.damage = skill_data.SkillDamage
 	self.projectile_speed = skill_data.SkillProjectileSpeed
@@ -31,6 +38,8 @@ func _on_Spell_body_entered(body):
 	$CollisionPolygon2D.set_deferred("disabled", true)
 	if body.is_in_group("Enemies"):
 		body.on_hit(self.damage)
+	elif body.is_in_group("Player"):
+		body.take_damage(self.damage)
 	self.hide()
 
 func _process(delta):

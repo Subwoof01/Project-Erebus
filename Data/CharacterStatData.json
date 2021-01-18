@@ -63,9 +63,9 @@
     "StatBaseValue": 0
   },
   "ManaRegen": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "MovementSpeed": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   }
 }

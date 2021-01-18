@@ -50,8 +50,4 @@ func _on_Panel_gui_input(event: InputEvent):
 		self.pick_up()
 		
 func pick_up():
-	var player = self.get_tree().get_root().get_node("Game").player
-	if $ClickArea in player.things_in_interact_range:
-		ItemManager.pickup(self.item_data)
-	else:
-		player.queue_action("pickup", self.item_data, $ClickArea)
+	ItemManager.game.player.pickup(self)
