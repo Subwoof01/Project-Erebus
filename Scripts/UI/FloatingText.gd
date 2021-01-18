@@ -7,11 +7,11 @@ var amount = 0
 var velocity = Vector2(0, 0)
 var move_amount = 80
 var max_size = Vector2(1, 1)
-var type = ""
+var is_crit = false
 
 func _ready():
-	self.label.text = (str(amount))
-	if self.type == "Crit":
+	self.label.text = (str(round(amount)))
+	if self.is_crit:
 		max_size = Vector2(1.5, 1.5)
 		label.set("custom_colors/font_color", Color("fcfb01"))
 
