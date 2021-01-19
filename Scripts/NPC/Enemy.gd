@@ -37,7 +37,6 @@ var defensives = {
 	"Frost": 0,
 	"Lightning": 0,
 	"Nature": 0,
-	"Spell": 0
 }
 
 var shader_material
@@ -180,7 +179,8 @@ func on_death():
 
 func on_hit(damage, type, crit=false):
 	for t in type:
-		damage *= 1 - self.defensives[t]
+		if self.defensives.keys().has(t):
+			damage *= 1 - self.defensives[t]
 	self.current_health -= damage
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()

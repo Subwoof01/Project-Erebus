@@ -982,7 +982,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 68, 69, 70, 71, 72, 73, 74, 43 ]
+"values": [ 68, 69, 70, 71, 72, 73, 74, 75 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -1269,14 +1269,14 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
-frame = 1
+frame = 3
 
 [node name="Head" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
-frame = 1
+frame = 3
 
 [node name="Weapon" type="Sprite" parent="."]
 visible = false

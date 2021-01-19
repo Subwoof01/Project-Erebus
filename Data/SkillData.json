@@ -1,5 +1,6 @@
 {
   "Ice_Spear": {
+    "SkillTooltip": "Conjure an icicle to launch at an enemy dealing $SkillDamage.0 to $SkillDamage.1 Frost damage.",
     "SkillType": "RangedSingleTargetSkill",
     "SkillDamage": [
       80,
@@ -17,10 +18,12 @@
     "SkillManaCost": 5,
     "SkillTags": [
       "Spell",
+      "Projectile",
       "Frost"
     ]
   },
   "Earthquake": {
+    "SkillTooltip": "Causes the earth around the target location to tremble and break dealing $SkillDamage.0 to $SkillDamage.1 Nature damage to each enemy hit.",
     "SkillType": "RangedAoESkill",
     "SkillDamage": [
       50,
@@ -38,10 +41,12 @@
     "SkillManaCost": 15,
     "SkillTags": [
       "Spell",
+      "AoE",
       "Nature"
     ]
   },
   "Ice_Nova": {
+    "SkillTooltip": "A frozen blast expands around you dealing $SkillDamage.0 to $SkillDamage.1 Frost damage to each enemy hit.",
     "SkillType": "ExpandingAoESkill",
     "SkillDamage": [
       60,
@@ -59,12 +64,17 @@
     "SkillManaCost": 30,
     "SkillTags": [
       "Spell",
+      "AoE",
       "Frost"
     ]
   },
   "Healing_Word": {
+    "SkillTooltip": "NO_TOOLTIP",
     "SkillType": "SingleTargetHeal",
-    "SkillDamage": "N/A",
+    "SkillDamage": [
+      0,
+      0
+    ],
     "SkillProjectileSpeed": "N/A",
     "SkillRadius": "N/A",
     "SkillDamageDelayTime": "N/A",
@@ -74,6 +84,10 @@
     "SkillHeal": 50,
     "SkillProjectileAcceleration": "N/A",
     "SkillProjectileDelay": "N/A",
-    "SkillManaCost": 10
+    "SkillManaCost": 10,
+    "SkillTags": [
+      "Spell",
+      "Heal"
+    ]
   }
 }
