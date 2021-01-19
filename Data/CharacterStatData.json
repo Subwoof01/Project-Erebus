@@ -3,7 +3,7 @@
     "StatBaseValue": 100
   },
   "Mana": {
-    "StatBaseValue": 500
+    "StatBaseValue": 50
   },
   "Strength": {
     "StatBaseValue": 3
@@ -27,7 +27,7 @@
     "StatBaseValue": 0
   },
   "CriticalHitChance": {
-    "StatBaseValue": 3000
+    "StatBaseValue": 100
   },
   "CriticalHitDamage": {
     "StatBaseValue": 1.5
@@ -45,6 +45,12 @@
     "StatBaseValue": 1
   },
   "SpellDamage": {
+    "StatBaseValue": 1
+  },
+  "ProjectileDamage": {
+    "StatBaseValue": 1
+  },
+  "AoEDamage": {
     "StatBaseValue": 1
   },
   "BlockChance": {
@@ -66,7 +72,7 @@
     "StatBaseValue": 1
   },
   "ManaRegen": {
-    "StatBaseValue": 10
+    "StatBaseValue": 1
   },
   "MovementSpeed": {
     "StatBaseValue": 0

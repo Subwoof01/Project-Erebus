@@ -184,6 +184,7 @@ margin_left = 1060.0
 margin_top = 500.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 texture = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -210,6 +211,7 @@ margin_left = 1060.0
 margin_top = 500.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 value = 100.0
 texture_progress = ExtResource( 14 )
 fill_mode = 3
@@ -225,6 +227,7 @@ margin_left = 1060.0
 margin_top = 500.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -235,6 +238,7 @@ margin_left = 1060.0
 margin_top = 500.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 texture = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -247,39 +251,43 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -530.0
 margin_top = -230.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/ActionBarManaOverlay/Background"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/ActionBarManaOverlay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 11.0
-margin_top = 169.0
-margin_right = -242.0
-margin_bottom = -11.0
+margin_left = 761.0
+margin_top = 659.0
+margin_right = -298.0
+margin_bottom = -10.9999
+mouse_filter = 2
 custom_constants/separation = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill1" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer"]
+[node name="Skill1" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
 margin_right = 50.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill1" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill1"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -18.0
@@ -293,23 +301,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill2" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer"]
+[node name="Skill2" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
 margin_left = 57.0
 margin_right = 107.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill2" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill2"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -18.0
@@ -323,23 +333,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill3" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer"]
+[node name="Skill3" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
 margin_left = 114.0
 margin_right = 164.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill3" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill3"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -18.0
@@ -353,23 +365,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill4" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer"]
+[node name="Skill4" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
 margin_left = 171.0
 margin_right = 221.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill4" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer/Skill4"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -18.0
@@ -384,10 +398,11 @@ __meta__ = {
 }
 
 [node name="Overlay" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay"]
-margin_left = 750.051
-margin_top = 489.913
-margin_right = 1280.05
-margin_bottom = 719.913
+margin_left = 750.0
+margin_top = 490.0
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 2
 texture = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -406,6 +421,9 @@ margin_top = 100.0
 margin_right = 530.0
 margin_bottom = 229.0
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Backing" type="TextureRect" parent="CanvasLayer/UI/HealthOrb"]
 modulate = Color( 0, 0, 0, 1 )
@@ -476,19 +494,17 @@ valign = 1
 clip_text = true
 
 [node name="Experience" type="Control" parent="CanvasLayer/UI"]
-margin_left = 293.044
-margin_top = 364.102
-margin_right = 333.044
-margin_bottom = 404.102
+margin_left = 530.0
+margin_top = 1065.0
+margin_right = 1390.0
+margin_bottom = 1080.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Bar" type="TextureProgress" parent="CanvasLayer/UI/Experience"]
-margin_left = 237.0
-margin_top = 701.0
-margin_right = 1097.0
-margin_bottom = 716.0
+margin_right = 860.0
+margin_bottom = 15.0
 texture_under = ExtResource( 16 )
 texture_over = ExtResource( 17 )
 texture_progress = ExtResource( 18 )
@@ -532,3 +548,11 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" to="." method="_on_Skill_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" to="." method="_on_Skill_mouse_entered" binds= [ 1 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" to="." method="_on_Skill_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" to="." method="_on_Skill_mouse_entered" binds= [ 2 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" to="." method="_on_Skill_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" to="." method="_on_Skill_mouse_entered" binds= [ 3 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" to="." method="_on_Skill_mouse_exited"]

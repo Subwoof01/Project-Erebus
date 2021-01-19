@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var action_bar_path = "UI/ActionBarManaOverlay/Background/HBoxContainer/"
+onready var action_bar_path = "UI/ActionBarManaOverlay/HBoxContainer/"
 
 
 var loaded_skills

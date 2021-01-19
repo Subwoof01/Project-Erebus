@@ -211,28 +211,27 @@ func get_crit_chance():
 	var crit_chance = self.stats["CriticalHitChance"].value / 10000
 	return crit_chance
 
-func damage(type, base=0):
+func damage(type, can_crit=true, b=[0,0]):
+	var base = b.duplicate()
 	# Add more damage logic here. Crit chance, other dmg types etc.
-	self.rng.randomize()
 	var is_crit = false
-	var crit_chance = self.rng.randf()
-	if crit_chance <= self.get_crit_chance():
-		is_crit = true
+	if can_crit:
+		self.rng.randomize()
+		var crit_chance = self.rng.randf()
+		if crit_chance <= self.get_crit_chance():
+			is_crit = true
 	
 	self.rng.randomize()
 	var damage
-	match type:
-		"Physical":
-			damage = self.rng.randf_range(self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value)
-		_:
-			damage = self.rng.randf_range(base[0], base[1])
-			for t in type:
-				var d_type = t + "Damage"
-				damage *= self.stats[d_type].value
+	for t in type:
+		var d_type = t + "Damage"
+		base[0] *= self.stats[d_type].value
+		base[1] *= self.stats[d_type].value
+	damage = self.rng.randf_range(base[0], base[1])
 
 	if is_crit:
 		damage *= self.stats["CriticalHitDamage"].value
-	return {"damage": damage, "crit": is_crit}
+	return {"damage": damage, "crit": is_crit, "minmax": [base[0], base[1]]}
 
 
 func take_damage(damage):
@@ -316,7 +315,7 @@ func melee_strike(target=null):
 	self.MAX_SPEED = 180
 
 func _on_MeleeArea_body_entered(body):
-	body.get_parent().on_hit(self.damage("Physical"))
+	body.get_parent().on_hit(self.damage(["Physical"], true, [self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value]))
 
 func use_skill(pressed_slot):
 	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
@@ -344,7 +343,7 @@ func use_skill(pressed_slot):
 			skill_instance.rotation = $Center.get_angle_to(get_global_mouse_position())
 			skill_instance.position = $TurnAxis/CastPoint.global_position
 			skill_instance.origin = "Player"
-			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, true, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
 			skill_instance.damage = damage["damage"]
 			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
 			skill_instance.crit = damage["crit"]
@@ -355,7 +354,7 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.get_global_mouse_position()
 			skill_instance.origin = "Player"
-			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, true, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
 			skill_instance.damage = damage["damage"]
 			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
 			skill_instance.crit = damage["crit"]
@@ -366,7 +365,7 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			skill_instance.position = self.global_position
 			skill_instance.origin = "Player"
-			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
+			var damage = self.damage(DataImport.skill_data[selected_skills[pressed_slot]].SkillTags, true, DataImport.skill_data[selected_skills[pressed_slot]].SkillDamage)
 			skill_instance.damage = damage["damage"]
 			skill_instance.damage_type = DataImport.skill_data[selected_skills[pressed_slot]].SkillTags
 			skill_instance.crit = damage["crit"]
