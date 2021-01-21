@@ -4,6 +4,7 @@ onready var player = $NavigationMap/YSort/Player
 onready var ui = $CanvasLayer/UI
 onready var char_window = $CanvasLayer/UI/StatScreen
 onready var inventory_window = $CanvasLayer/UI/InventoryScreen
+onready var skill_screen = $CanvasLayer/UI/SkillTreeScreen
 onready var stat_window = $CanvasLayer/UI/StatScreen
 onready var ui_health_bar = $CanvasLayer/UI/EnemyHealthBar
 onready var ui_enemy_name = $CanvasLayer/UI/EnemyHealthBar/EnemyName
@@ -39,10 +40,18 @@ func _unhandled_input(event):
 	self.player.handle_inputs()
 	if Input.is_action_just_pressed("ui_char_window"):
 		self.char_window.visible = !self.char_window.visible
+		if self.skill_screen.visible:
+			self.skill_screen.visible = false
 		self.char_window.on_show()
 	
 	if Input.is_action_just_pressed("ui_inventory_window"):
 		self.inventory_window.visible = !self.inventory_window.visible
+
+	if Input.is_action_just_pressed("ui_skill_screen"):
+		self.skill_screen.visible = !self.skill_screen.visible
+		if self.char_window.visible:
+			self.char_window.visible = false
+		self.skill_screen.update_info()
 
 	if Input.is_action_just_pressed("ui_skill8"):
 		var dooter = skelly.instance()
@@ -72,10 +81,9 @@ func _on_Skill_mouse_entered(slot):
 	var regex = RegEx.new()
 	regex.compile("\\$(?<name>([a-z]|[A-Z])*).(?<index>[0-9]+)")
 	var result = regex.search_all(skill_data["SkillTooltip"])
-	skill_data["SkillDamage"] = self.player.damage(skill_data["SkillTags"], false, skill_data["SkillDamage"])["minmax"]
-	skill_data["SkillDamage"] = [round(skill_data["SkillDamage"][0]), round(skill_data["SkillDamage"][1])]
-	print(skill_data["SkillDamage"])
-	print(DataImport.skill_data[self.player.selected_skills[slot]]["SkillDamage"])
+	if skill_data["SkillDamage"][1] > 0:
+		skill_data["SkillDamage"] = self.player.damage(skill_data["SkillTags"], false, skill_data["SkillDamage"])["minmax"]
+		skill_data["SkillDamage"] = [round(skill_data["SkillDamage"][0]), round(skill_data["SkillDamage"][1])]
 	for i in len(result):
 		regex.compile("\\$" + result[i].get_string("name") + "." + result[i].get_string("index"))
 		skill_data["SkillTooltip"] = regex.sub(skill_data["SkillTooltip"], "[color=#9a94ee]" + str(skill_data[result[i].get_string("name")][int(result[i].get_string("index"))]) + "[/color]")

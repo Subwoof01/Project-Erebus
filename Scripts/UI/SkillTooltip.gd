@@ -19,6 +19,7 @@ var use_time = 0
 var skill_name = ""
 var tags = []
 var ic = null
+var position_override = null
 
 func _ready():
 	self.skill_icon.texture = ic
@@ -50,7 +51,7 @@ func scale_tooltip():
 func set_pos():
 	var margin = Vector2(10, 10)
 	var cursor_pos = self.get_global_mouse_position()
-	var new_pos = Vector2(cursor_pos.x - self.background.rect_size.x, cursor_pos.y - self.background.rect_size.y)
+	var new_pos = Vector2(cursor_pos.x - self.background.rect_size.x, cursor_pos.y - self.background.rect_size.y) if self.position_override == null else self.position_override
 	if new_pos.x < margin.x:
 		new_pos.x = margin.x
 	if new_pos.y < margin.y:
