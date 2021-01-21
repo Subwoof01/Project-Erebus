@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/UI/Main/Windows/Inventory.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UI/Inventory/InventoryScreen.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UI/Inventory/EquipmentSlots.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/UI/Inventory/GridBackPack.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/UI/Main/AbilityEssence_Icon.png" type="Texture" id=5]
+[ext_resource path="res://Resources/UI_Font_22.tres" type="Theme" id=6]
 
 [node name="InventoryScreen" type="Control"]
 anchor_left = 1.0
@@ -174,6 +176,42 @@ margin_top = 542.0
 margin_right = 539.0
 margin_bottom = 798.0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityEssencePanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 22.0
+margin_top = 497.0
+margin_right = 186.0
+margin_bottom = 527.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityEssenceIcon" type="TextureRect" parent="AbilityEssencePanel"]
+modulate = Color( 0.313726, 0.823529, 1, 1 )
+margin_left = 137.947
+margin_top = 5.94101
+margin_right = 158.947
+margin_bottom = 26.941
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="AbilityEssencePanel"]
+margin_left = 6.0
+margin_top = 1.0
+margin_right = 135.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 0, 30 )
+theme = ExtResource( 6 )
+text = "0"
+align = 2
+valign = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

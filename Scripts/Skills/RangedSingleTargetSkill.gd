@@ -30,7 +30,6 @@ func _ready():
 	yield(self.get_tree().create_timer(self.skill_projectile_delay), "timeout")
 	self.accelerate = true
 	self.self_destruct()
-	print(crit)
 
 func self_destruct():
 	yield(self.get_tree().create_timer(life_time), "timeout")

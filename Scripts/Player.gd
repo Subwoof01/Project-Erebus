@@ -20,6 +20,7 @@ var total_exp = 0
 var experience = 0
 var next_level_exp = 1500
 var stat_points = 0
+var ability_essences = 1
 
 var stats = {}
 var current_health
@@ -45,6 +46,7 @@ var current_target = null
 
 var action_bar_skills = {"Skill1": "Ice_Spear", "Skill2": "Earthquake", "Skill3": "Ice_Nova", "Skill4": "Healing_Word"}
 var selected_skills = []
+var learned_skills = {}
 
 var things_in_interact_range = []
 
@@ -68,6 +70,7 @@ var skills = []
 var time_since_last_tick = 0
 
 func _ready():
+	self.learned_skills["Ice_Spear"] = DataImport.skill_data["Ice_Spear"]
 	for stat in StatData.stat_data:
 		self.stats[stat] = CharacterStat.new(StatData.stat_data[stat]["StatBaseValue"])
 
@@ -283,6 +286,7 @@ func level_up():
 	self.experience = 0
 	self.next_level_exp *= 1.5
 	self.stat_points += 5
+	self.ability_essences += 1
 
 func mouse_position():
 	var m_pos = self.game.get_global_mouse_position()

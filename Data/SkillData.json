@@ -20,7 +20,9 @@
       "Spell",
       "Projectile",
       "Frost"
-    ]
+    ],
+    "SkillRequiredLevel": 1,
+    "SkillUnlockCost": 1
   },
   "Earthquake": {
     "SkillTooltip": "Causes the earth around the target location to tremble and break dealing $SkillDamage.0 to $SkillDamage.1 Nature damage to each enemy hit.",
@@ -43,7 +45,9 @@
       "Spell",
       "AoE",
       "Nature"
-    ]
+    ],
+    "SkillRequiredLevel": 3,
+    "SkillUnlockCost": 2
   },
   "Ice_Nova": {
     "SkillTooltip": "A frozen blast expands around you dealing $SkillDamage.0 to $SkillDamage.1 Frost damage to each enemy hit.",
@@ -66,10 +70,12 @@
       "Spell",
       "AoE",
       "Frost"
-    ]
+    ],
+    "SkillRequiredLevel": 5,
+    "SkillUnlockCost": 3
   },
   "Healing_Word": {
-    "SkillTooltip": "NO_TOOLTIP",
+    "SkillTooltip": "Call upon the light to heal your wounds for $SkillHeal.0 to $SkillHeal.1 health.",
     "SkillType": "SingleTargetHeal",
     "SkillDamage": [
       0,
@@ -81,13 +87,18 @@
     "SkillRemoveDelayTime": "N/A",
     "SkillCastTime": 0.4,
     "SkillExpansionTime": "N/A",
-    "SkillHeal": 50,
+    "SkillHeal": [
+      25,
+      50
+    ],
     "SkillProjectileAcceleration": "N/A",
     "SkillProjectileDelay": "N/A",
     "SkillManaCost": 10,
     "SkillTags": [
       "Spell",
       "Heal"
-    ]
+    ],
+    "SkillRequiredLevel": 10,
+    "SkillUnlockCost": 5
   }
 }
