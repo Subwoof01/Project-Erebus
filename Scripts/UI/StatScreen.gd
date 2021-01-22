@@ -222,6 +222,8 @@ func _input(event):
 		self.update_stat_window()
 
 func _on_StrengthButton_pressed():
+	self.player.stats["Health"].remove_all_modifiers_from_source("Strength")
+	self.player.stats["PhysicalDamage"].remove_all_modifiers_from_source("Strength")
 	if self.alt_pressed:
 		if self.player.stats["Strength"].base_value > 3:
 			self.player.stats["Strength"].base_value -= 1
@@ -231,10 +233,20 @@ func _on_StrengthButton_pressed():
 	else:
 		self.player.stats["Strength"].base_value += 1
 		self.player.stat_points -= 1
+
+	var base = floor(self.player.stats["Strength"].value / 5)
+	var health_bonus = floor(self.player.stats["Strength"].value / 2)
+	var phys_bonus = base * 0.01
+	var health_mod = StatModifier.new(health_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Strength")
+	var phys_mod = StatModifier.new(phys_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Strength")
+	self.player.stats["Health"].add_modifier(health_mod)
+	self.player.stats["PhysicalDamage"].add_modifier(phys_mod)
 	self.update_stat_window()
 
 
 func _on_DexterityButton_pressed():
+	self.player.stats["Armour"].remove_all_modifiers_from_source("Dexterity")
+	self.player.stats["CriticalHitChance"].remove_all_modifiers_from_source("Dexterity")
 	if self.alt_pressed:
 		if self.player.stats["Dexterity"].base_value > 3:
 			self.player.stats["Dexterity"].base_value -= 1
@@ -245,10 +257,20 @@ func _on_DexterityButton_pressed():
 	else:
 		self.player.stats["Dexterity"].base_value += 1
 		self.player.stat_points -= 1
+	
+	var base = floor(self.player.stats["Dexterity"].value / 5)
+	var armour_bonus = self.player.stats["Dexterity"].value * 2
+	var chc_bonus = base * 0.1
+	var armour_mod = StatModifier.new(armour_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Dexterity")
+	var chc_mod = StatModifier.new(chc_bonus, StatModifier.STAT_MOD_TYPE.PercentAdd, int(StatModifier.STAT_MOD_TYPE.PercentAdd), "Dexterity")
+	self.player.stats["Armour"].add_modifier(armour_mod)
+	self.player.stats["CriticalHitChance"].add_modifier(chc_mod)
 	self.update_stat_window()
 
 
 func _on_IntelligenceButton_pressed():
+	self.player.stats["Mana"].remove_all_modifiers_from_source("Intelligence")
+	self.player.stats["SpellDamage"].remove_all_modifiers_from_source("Intelligence")
 	if self.alt_pressed:
 		if self.player.stats["Intelligence"].base_value > 3:
 			self.player.stats["Intelligence"].base_value -= 1
@@ -258,4 +280,12 @@ func _on_IntelligenceButton_pressed():
 	else:
 		self.player.stats["Intelligence"].base_value += 1
 		self.player.stat_points -= 1
+		
+	var base = floor(self.player.stats["Intelligence"].value / 5)
+	var mana_bonus = floor(self.player.stats["Intelligence"].value / 2)
+	var spell_bonus = base * 0.01
+	var mana_mod = StatModifier.new(mana_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Intelligence")
+	var spell_mod = StatModifier.new(spell_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Intelligence")
+	self.player.stats["Mana"].add_modifier(mana_mod)
+	self.player.stats["SpellDamage"].add_modifier(spell_mod)
 	self.update_stat_window()

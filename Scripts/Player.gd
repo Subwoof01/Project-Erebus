@@ -19,7 +19,7 @@ var level = 3
 var total_exp = 0
 var experience = 0
 var next_level_exp = 1500
-var stat_points = 0
+var stat_points = 100
 var ability_essences = 3
 
 var stats = {}
@@ -72,6 +72,31 @@ var time_since_last_tick = 0
 func _ready():
 	for stat in StatData.stat_data:
 		self.stats[stat] = CharacterStat.new(StatData.stat_data[stat]["StatBaseValue"])
+	
+	
+	var str_base = floor(self.stats["Strength"].value / 5)
+	var health_bonus = floor(self.stats["Strength"].value / 2)
+	var phys_bonus = str_base * 0.01
+	var health_mod = StatModifier.new(health_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Strength")
+	var phys_mod = StatModifier.new(phys_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Strength")
+	self.stats["Health"].add_modifier(health_mod)
+	self.stats["PhysicalDamage"].add_modifier(phys_mod)
+
+	var dex_base = floor(self.stats["Dexterity"].value / 5)
+	var armour_bonus = self.stats["Dexterity"].value * 2
+	var chc_bonus = dex_base * 0.1
+	var armour_mod = StatModifier.new(armour_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Dexterity")
+	var chc_mod = StatModifier.new(chc_bonus, StatModifier.STAT_MOD_TYPE.PercentAdd, int(StatModifier.STAT_MOD_TYPE.PercentAdd), "Dexterity")
+	self.stats["Armour"].add_modifier(armour_mod)
+	self.stats["CriticalHitChance"].add_modifier(chc_mod)
+
+	var int_base = floor(self.stats["Intelligence"].value / 5)
+	var mana_bonus = floor(self.stats["Intelligence"].value / 2)
+	var spell_bonus = int_base * 0.01
+	var mana_mod = StatModifier.new(mana_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Intelligence")
+	var spell_mod = StatModifier.new(spell_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Intelligence")
+	self.stats["Mana"].add_modifier(mana_mod)
+	self.stats["SpellDamage"].add_modifier(spell_mod)
 
 	self.current_health = self.stats["Health"].value
 	self.current_mana = self.stats["Mana"].value
