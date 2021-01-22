@@ -15,12 +15,12 @@ onready var animation_mode = animation_tree.get("parameters/playback")
 onready var animation_player = $AnimationPlayer
 
 var p_name = "Player_Name"
-var level = 1
+var level = 3
 var total_exp = 0
 var experience = 0
 var next_level_exp = 1500
 var stat_points = 0
-var ability_essences = 1
+var ability_essences = 3
 
 var stats = {}
 var current_health
@@ -44,7 +44,7 @@ var shift_down = false
 
 var current_target = null
 
-var action_bar_skills = {"Skill1": "Ice_Spear", "Skill2": "Earthquake", "Skill3": "Ice_Nova", "Skill4": "Healing_Word"}
+var action_bar_skills = {"Skill1": "Ice_Spear", "Skill2": "", "Skill3": "", "Skill4": ""}
 var selected_skills = []
 var learned_skills = {}
 
@@ -76,11 +76,15 @@ func _ready():
 
 	self.current_health = self.stats["Health"].value
 	self.current_mana = self.stats["Mana"].value
-	for skill in self.action_bar_skills:
-		self.selected_skills.append(self.action_bar_skills[skill])
+	self.update_selected_skills()
 
 	self.update_health_orb()
 	self.update_mana_orb()
+
+func update_selected_skills():
+	self.selected_skills.clear()
+	for skill in self.action_bar_skills:
+		self.selected_skills.append(self.action_bar_skills[skill])
 
 func _process(delta):
 	self.time_since_last_tick += delta
