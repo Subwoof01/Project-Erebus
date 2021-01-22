@@ -285,13 +285,13 @@ func on_heal(heal):
 	self.update_health_orb()
 
 func update_health_orb():
-	self.health_text.text = str(self.current_health) + "/" + str(self.stats["Health"].value)
+	self.health_text.text = str(floor(self.current_health)) + "/" + str(floor(self.stats["Health"].value))
 	var percentage_hp = int((float(self.current_health) / self.stats["Health"].value) * 100)
 	health_tween.interpolate_property(health_orb, 'value', health_orb.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	health_tween.start()
 
 func update_mana_orb():
-	self.mana_text.text = str(self.current_mana) + "/" + str(self.stats["Mana"].value)
+	self.mana_text.text = str(floor(self.current_mana)) + "/" + str(floor(self.stats["Mana"].value))
 	var percentage_mp = int((float(self.current_mana) / self.stats["Mana"].value) * 100)
 	mana_tween.interpolate_property(mana_orb, 'value', mana_orb.value, percentage_mp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	mana_tween.start()
