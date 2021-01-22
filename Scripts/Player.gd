@@ -19,7 +19,7 @@ var level = 3
 var total_exp = 0
 var experience = 0
 var next_level_exp = 1500
-var stat_points = 100
+var stat_points = 0
 var ability_essences = 3
 
 var stats = {}
