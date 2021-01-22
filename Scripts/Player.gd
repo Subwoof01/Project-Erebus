@@ -44,7 +44,7 @@ var shift_down = false
 
 var current_target = null
 
-var action_bar_skills = {"Skill1": "Ice_Spear", "Skill2": "", "Skill3": "", "Skill4": ""}
+var action_bar_skills = {"Skill1": "", "Skill2": "", "Skill3": "", "Skill4": ""}
 var selected_skills = []
 var learned_skills = {}
 
@@ -70,7 +70,6 @@ var skills = []
 var time_since_last_tick = 0
 
 func _ready():
-	self.learned_skills["Ice_Spear"] = DataImport.skill_data["Ice_Spear"]
 	for stat in StatData.stat_data:
 		self.stats[stat] = CharacterStat.new(StatData.stat_data[stat]["StatBaseValue"])
 
@@ -326,6 +325,9 @@ func _on_MeleeArea_body_entered(body):
 	body.get_parent().on_hit(self.damage(["Physical"], true, [self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value]))
 
 func use_skill(pressed_slot):
+	if selected_skills[pressed_slot] == "":
+		return
+	
 	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
 	if mana_cost > self.current_mana:
 		return

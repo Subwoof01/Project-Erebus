@@ -10,7 +10,6 @@ func _ready():
 
 func _on_Skill_gui_input(event, skill_slot):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		self.visible = !self.visible
 		self.selected_slot = skill_slot
 		print(self.game.player.learned_skills.keys())
 		for skill in self.game.player.learned_skills:
@@ -26,6 +25,9 @@ func _on_Skill_gui_input(event, skill_slot):
 			self.selectable_skills[skill] = self.game.player.learned_skills[skill]
 			self.rect_size = Vector2(self.rect_size.x, 50)
 			self.add_child(skill_icon)
+		
+		if len(self.selectable_skills) > 0:
+			self.visible = !self.visible
 
 
 func _on_Skill_mouse_entered(skill):
