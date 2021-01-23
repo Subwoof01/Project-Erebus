@@ -44,7 +44,7 @@ var shift_down = false
 
 var current_target = null
 var action_bar_skills = {
-	"Skill1": "Ice_Spear", 
+	"Skill1": "", 
 	"Skill2": "", 
 	"Skill3": "", 
 	"Skill4": "",
