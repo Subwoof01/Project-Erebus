@@ -78,34 +78,6 @@
             0.19,
             0.23
           ]
-        },
-        {
-          "FlatHealth": [
-            "Flat",
-            10,
-            20
-          ]
-        },
-        {
-          "IncreasedHealth": [
-            "Add",
-            0.1,
-            0.2
-          ]
-        },
-        {
-          "FlatMana": [
-            "Flat",
-            10,
-            20
-          ]
-        },
-        {
-          "IncreasedMana": [
-            "Add",
-            0.1,
-            0.2
-          ]
         }
       ]
     },
