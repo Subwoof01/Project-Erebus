@@ -14,7 +14,7 @@ var info_set = false
 
 func _process(delta):
 	if ItemManager.alt_down:
-		self.name_label.text = self.item_data.equipment_name
+		self.name_label.text = self.item_data.item_name
 		self.name_label.rect_position.x = self.name_label.rect_size.x * 0.5 * -1
 		self.name_label.visible = true
 	else:

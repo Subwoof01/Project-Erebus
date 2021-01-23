@@ -1,26 +1,12 @@
 # extends Node
+extends "Item.gd"
 class_name Equipment
-
-enum RARITY {
-	Normal,
-	Magic,
-	Rare,
-	Unique
-}
 
 var stat_modifier = load("res://Scripts/Stats/StatModifier.gd").new(1, 1)
 
-var equipment_name: String
-var level: int
-var rarity
-var type: String
+var equipment_type: String
 var sub_type: String
 var slot
-var inventory_size: Array
-var icon_path: String
-var ui_sprite
-var world_icon_path: String
-var world_sprite
 var stats: Dictionary = {}
 var mods: Dictionary = {}
 var enhancements: Dictionary = {}
@@ -60,7 +46,7 @@ func get_stat_scalar():
 func get_max_scalar():
 	return self.max_rating * self.max_level
 
-func create_mod(min_val, max_val, _type) -> StatModifier:
+func create_mod(min_val, max_val, _type, source) -> StatModifier:
 	var value: float = self.rng.randf_range(min_val, max_val)
 	var mod_type = stat_modifier.STAT_MOD_TYPE.PercentAdd
 	# print("mod_type ", _type, " value ", value)
@@ -79,7 +65,7 @@ func create_mod(min_val, max_val, _type) -> StatModifier:
 			var normalised = inverse_lerp(0, get_max_scalar(), self.get_stat_scalar())
 			value *= max(1, Mathf.crossfade(Mathf.smooth_start2(normalised), Mathf.smooth_stop2(normalised), normalised) * self.scale)
 	
-	var mod: StatModifier = StatModifier.new(value, mod_type)
+	var mod: StatModifier = StatModifier.new(value, mod_type, mod_type, source)
 	return mod
 
 func add_affix(affix_list, _type="affix", item=self):
@@ -88,11 +74,11 @@ func add_affix(affix_list, _type="affix", item=self):
 	if _type == "prefix":
 		if !item.prefix_slot_open:
 			return false
-		item.equipment_name = random_affix["Name"] + " " + item.equipment_name
+		item.item_name = random_affix["Name"] + " " + item.item_name
 	elif _type == "suffix":
 		if !item.suffix_slot_open:
 			return false
-		item.equipment_name = item.equipment_name + " " + random_affix["Name"]
+		item.item_name = item.item_name + " " + random_affix["Name"]
 	elif _type == "affix" and item.affix_slots_open == 0:
 		return false
 	
@@ -129,7 +115,7 @@ func add_affix(affix_list, _type="affix", item=self):
 	for mod in random_affix["Mods"]:
 		if !item.mods.has(mod.keys()[0]):
 			item.mods[mod.keys()[0]] = []
-		item.mods[mod.keys()[0]].append(item.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0]))
+		item.mods[mod.keys()[0]].append(item.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0], random_affix["Name"]))
 		# print("added mod ", mod.keys()[0], " values: ", mod[mod.keys()[0]][1], " ", mod[mod.keys()[0]][2], " ", mod[mod.keys()[0]][0])
 		if _type == "prefix":
 			self.prefix[mod.keys()[0]] = []
@@ -150,13 +136,14 @@ func create_randomised_equipment(level):
 	# ItemDb.ITEMS[str(rng.randi_range(1, len(ItemDb.ITEMS) - 1))]
 	# ItemDb.ITEMS["1"]
 	var base_item = ItemDb.ITEMS[str(rng.randi_range(1, len(ItemDb.ITEMS) - 1))]
-	self.equipment_name = base_item["ItemName"]
+	self.item_name = base_item["ItemName"]
 	self.slot = base_item["slot"]
 	self.inventory_size = [base_item["width"], base_item["height"]]
-	self.type = base_item["ItemType"]
+	self.type = "Equipment"
+	self.equipment_type = base_item["ItemType"]
 	self.sub_type = base_item["ItemSubType"]
-	self.icon_path = "res://Sprites/Items/" + self.type + "/" + base_item["icon"] + ".png"
-	self.world_icon_path = "res://Sprites/Items/" + self.type + "/" + base_item["icon"] + "_World.png"
+	self.icon_path = "res://Sprites/Items/" + self.equipment_type + "/" + base_item["icon"] + ".png"
+	self.world_icon_path = "res://Sprites/Items/" + self.equipment_type + "/" + base_item["icon"] + "_World.png"
 	self.level = rng.randi_range(1, 100)
 	self.level_req = self.level * 0.7
 	self.strength = 0
@@ -182,7 +169,7 @@ func create_randomised_equipment(level):
 	# if ItemModData.implicit_mods.has(base_item["Itemequipment_Name"]):
 	# 	self.mods[base_item["Itemequipment_Name"]
 
-	if self.type == "Weapon":
+	if self.equipment_type == "Weapon":
 		self.item_level_rating = self.max_rating
 
 		var normalised = inverse_lerp(0, get_max_scalar(), self.get_stat_scalar())
@@ -221,7 +208,7 @@ func create_randomised_equipment(level):
 		self.stats["PhysicalDamageMin"] = StatModifier.new(self.stats["PhysicalDamageMin"].value, StatModifier.STAT_MOD_TYPE.Flat)
 		self.stats["PhysicalDamageMax"] = StatModifier.new(self.stats["PhysicalDamageMax"].value, StatModifier.STAT_MOD_TYPE.Flat)
 	
-	elif self.type == "Armour":
+	elif self.equipment_type == "Armour":
 		self.item_level_rating = self.max_rating
 
 		var normalised = inverse_lerp(0, get_max_scalar(), self.get_stat_scalar())
@@ -249,7 +236,7 @@ func create_randomised_equipment(level):
 				self.stats["Armour"].add_modifier(self.mods["EnhancedArmour"][i])
 		self.stats["Armour"] = StatModifier.new(self.stats["Armour"].value, StatModifier.STAT_MOD_TYPE.Flat)
 
-	elif self.type == "Jewelry":
+	elif self.equipment_type == "Jewelry":
 		self.item_level_rating = self.max_rating * 0.4
 
 		if self.prefix_slot_open:
@@ -264,7 +251,7 @@ func create_randomised_equipment(level):
 			if self.add_affix(ItemModData.affix_jewelry_mods):
 				self.affix_slots_open -= 1
 
-	elif self.type == "Shield":
+	elif self.equipment_type == "Shield":
 		self.item_level_rating = self.max_rating * 0.5
 
 		var normalised = inverse_lerp(0, get_max_scalar(), self.get_stat_scalar())
@@ -297,9 +284,9 @@ func create_randomised_equipment(level):
 		for mod in implicit["Mods"]:
 			if !self.mods.has(mod.keys()[0]):
 				self.mods[mod.keys()[0]] = []
-			self.mods[mod.keys()[0]].append(self.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0]))
+			self.mods[mod.keys()[0]].append(self.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0], implicit["Name"]))
 			self.implicit[mod.keys()[0]] = []
-			self.implicit[mod.keys()[0]].append(self.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0]))
+			self.implicit[mod.keys()[0]].append(self.create_mod(mod[mod.keys()[0]][1], mod[mod.keys()[0]][2], mod[mod.keys()[0]][0], implicit["Name"]))
 
 
 	self.requirements["Level"] = ceil(level_req)

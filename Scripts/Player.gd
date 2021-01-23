@@ -368,7 +368,7 @@ func _on_MeleeArea_body_entered(body):
 func use_skill(pressed_slot):
 	if !DataImport.skill_data.has(selected_skills[pressed_slot]):
 		return
-    
+	
 	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
 	if mana_cost > self.current_mana:
 		return
