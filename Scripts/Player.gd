@@ -43,8 +43,16 @@ var lmb_pressed = false
 var shift_down = false
 
 var current_target = null
-
-var action_bar_skills = {"Skill1": "", "Skill2": "", "Skill3": "", "Skill4": ""}
+var action_bar_skills = {
+	"Skill1": "Ice_Spear", 
+	"Skill2": "", 
+	"Skill3": "", 
+	"Skill4": "",
+	"Skill5": "",
+	"Skill6": "",
+	"Skill7": "",
+	"Skill8": ""
+}
 var selected_skills = []
 var learned_skills = {}
 
@@ -180,6 +188,14 @@ func handle_inputs():
 		self.use_skill(2)
 	if Input.is_action_pressed("ui_skill4") and can_cast:
 		self.use_skill(3)
+	if Input.is_action_pressed("ui_skill5") and can_cast:
+		self.use_skill(4)
+	if Input.is_action_pressed("ui_skill6") and can_cast:
+		self.use_skill(5)
+	if Input.is_action_pressed("ui_skill7") and can_cast:
+		self.use_skill(6)
+	if Input.is_action_pressed("ui_skill8") and can_cast:
+		self.use_skill(7)
 
 func _on_InteractRange_area_entered(area):
 	if len(self.action_queue) > 0:
@@ -350,9 +366,9 @@ func _on_MeleeArea_body_entered(body):
 	body.get_parent().on_hit(self.damage(["Physical"], true, [self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value]))
 
 func use_skill(pressed_slot):
-	if selected_skills[pressed_slot] == "":
+	if !DataImport.skill_data.has(selected_skills[pressed_slot]):
 		return
-	
+    
 	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
 	if mana_cost > self.current_mana:
 		return

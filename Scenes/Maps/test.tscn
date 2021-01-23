@@ -262,7 +262,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/ActionBarManaOverlay"]
+[node name="SkillSlots" type="Control" parent="CanvasLayer/UI/ActionBarManaOverlay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 761.0
@@ -270,18 +270,14 @@ margin_top = 659.0
 margin_right = -298.0
 margin_bottom = -10.9999
 mouse_filter = 2
-custom_constants/separation = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Skill1" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
+[node name="Skill1" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
 margin_right = 50.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
@@ -292,7 +288,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -49.0
@@ -306,14 +302,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill2" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
+[node name="Skill2" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
 margin_left = 57.0
 margin_right = 107.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 mouse_filter = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill2" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
@@ -324,7 +323,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill2"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -49.0
@@ -338,14 +337,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill3" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
+[node name="Skill3" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
 margin_left = 114.0
 margin_right = 164.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill3" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
@@ -356,7 +355,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill3"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -49.0
@@ -370,14 +369,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Skill4" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer"]
+[node name="Skill4" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
 margin_left = 171.0
 margin_right = 221.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 mouse_filter = 0
 
-[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" groups=[
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill4" groups=[
 "Shortcuts",
 ]]
 anchor_right = 1.0
@@ -388,7 +387,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4"]
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill4"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -49.0
@@ -397,6 +396,137 @@ margin_right = -35.0
 margin_bottom = 53.0
 custom_fonts/font = ExtResource( 8 )
 text = "R"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skill5" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
+margin_left = 228.0
+margin_right = 278.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
+
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill5" groups=[
+"Shortcuts",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill5"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -49.0
+margin_top = 25.0
+margin_right = -35.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 8 )
+text = "Q"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skill6" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
+margin_left = 114.0
+margin_top = -57.0
+margin_right = 164.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
+
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill6" groups=[
+"Shortcuts",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill6"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -49.0
+margin_top = 25.0
+margin_right = -35.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 8 )
+text = "LMB"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skill7" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
+margin_left = 171.0
+margin_top = -57.0
+margin_right = 221.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
+
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill7" groups=[
+"Shortcuts",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill7"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -49.0
+margin_top = 25.0
+margin_right = -30.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 8 )
+text = "MMB"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skill8" type="TextureRect" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots"]
+margin_left = 228.0
+margin_top = -57.0
+margin_right = 278.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 0
+
+[node name="SkillIcon" type="TextureButton" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" groups=[
+"Shortcuts",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotkey" type="Label" parent="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -49.0
+margin_top = 25.0
+margin_right = -35.0
+margin_bottom = 53.0
+custom_fonts/font = ExtResource( 8 )
+text = "RMB"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -569,15 +699,27 @@ script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 0 ]]
-[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
-[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill1" to="." method="_on_Skill_mouse_exited"]
-[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 1 ]]
-[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" to="." method="_on_Skill_mouse_entered" binds= [ 1 ]]
-[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill2" to="." method="_on_Skill_mouse_exited"]
-[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 2 ]]
-[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" to="." method="_on_Skill_mouse_entered" binds= [ 2 ]]
-[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill3" to="." method="_on_Skill_mouse_exited"]
-[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 3 ]]
-[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" to="." method="_on_Skill_mouse_entered" binds= [ 3 ]]
-[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/HBoxContainer/Skill4" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 0 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill2" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 1 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill2" to="." method="_on_Skill_mouse_entered" binds= [ 1 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill2" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill3" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 2 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill3" to="." method="_on_Skill_mouse_entered" binds= [ 2 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill3" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill4" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 3 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill4" to="." method="_on_Skill_mouse_entered" binds= [ 3 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill4" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill5" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 4 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill5" to="." method="_on_Skill_mouse_entered" binds= [ 4 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill5" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill6" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 5 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill6" to="." method="_on_Skill_mouse_entered" binds= [ 5 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill6" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill7" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 6 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill7" to="." method="_on_Skill_mouse_entered" binds= [ 6 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill7" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 7 ]]
+[connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="." method="_on_Skill_mouse_entered" binds= [ 7 ]]
+[connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="." method="_on_Skill_mouse_exited"]
