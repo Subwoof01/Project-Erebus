@@ -16,6 +16,10 @@ func on_equip(item):
 		self.player = self.get_tree().get_root().get_node("Game").player
 	if self.stat_screen == null:
 		self.stat_screen = self.get_tree().get_root().get_node("Game").stat_window
+
+	var current_health_percentage = (float(self.player.current_health) / self.player.stats["Health"].value) * 100
+	var current_mana_percentage = (float(self.player.current_health) / self.player.stats["Mana"].value) * 100
+
 	for stat in item.stats:
 		if self.player.stats.has(stat):
 			self.player.stats[stat].add_modifier(item.stats[stat])
@@ -31,19 +35,37 @@ func on_equip(item):
 						self.player.stats["PhysicalDamageMin"].add_modifier(item.mods[mod][i])
 						self.player.stats["PhysicalDamageMax"].add_modifier(item.mods[mod][i])
 				self.player.stats[mod].add_modifier(item.mods[mod][i])
+				print("added mod ", mod)
 		elif mod == "IncreasedArmour" or mod == "FlatArmour":
 			for i in range(len(item.mods[mod])):
 				self.player.stats["Armour"].add_modifier(item.mods[mod][i])
+				print("added mod ", mod)
+		elif mod == "IncreasedHealth" or mod == "FlatHealth":
+			for i in range(len(item.mods[mod])):
+				self.player.stats["Health"].add_modifier(item.mods[mod][i])
+				print("added mod ", mod)
+		elif mod == "IncreasedMana" or mod == "FlatMana":
+			for i in range(len(item.mods[mod])):
+				self.player.stats["Mana"].add_modifier(item.mods[mod][i])
+				print("added mod ", mod)
 		else:
 			print("Modifier could not be added to player stat! Stat not found: " + mod)
 
+	self.player.current_health = self.player.stats["Health"].value / 100 * current_health_percentage
+	self.player.current_mana = self.player.stats["Mana"].value / 100 * current_mana_percentage
 	self.stat_screen.update_stat_window()
+	self.player.update_health_orb()
+	self.player.update_mana_orb()
 
 func on_unequip(item):
 	if self.player == null:
 		self.player = self.get_tree().get_root().get_node("Game").player
 	if self.stat_screen == null:
 		self.stat_screen = self.get_tree().get_root().get_node("Game").stat_window
+
+
+	var current_health_percentage = (float(self.player.current_health) / self.player.stats["Health"].value) * 100
+	var current_mana_percentage = (float(self.player.current_health) / self.player.stats["Mana"].value) * 100
 
 	for stat in item.stats:
 		if self.player.stats.has(stat):
@@ -61,12 +83,25 @@ func on_unequip(item):
 				self.player.stats[mod].remove_modifier(item.mods[mod][i])
 		elif mod == "IncreasedArmour" or mod == "FlatArmour":
 			for i in range(len(item.mods[mod])):
-				print("added mod ", mod)
+				print("removed mod ", mod)
 				self.player.stats["Armour"].remove_modifier(item.mods[mod][i])
+		elif mod == "IncreasedHealth" or mod == "FlatHealth":
+			for i in range(len(item.mods[mod])):
+				print("removed mod ", mod)
+				self.player.stats["Health"].remove_modifier(item.mods[mod][i])
+		elif mod == "IncreasedMana" or mod == "FlatMana":
+			for i in range(len(item.mods[mod])):
+				print("removed mod ", mod)
+				self.player.stats["Mana"].remove_modifier(item.mods[mod][i])
 		else:
 			print("Modifier could not be removed from player stat! Stat not found: " + mod)
 	
+	self.player.current_health = self.player.stats["Health"].value / 100 * current_health_percentage
+	self.player.current_mana = self.player.stats["Mana"].value / 100 * current_mana_percentage
+
 	self.stat_screen.update_stat_window()
+	self.player.update_health_orb()
+	self.player.update_mana_orb()
 
 func disable_off_hand():
 	$OffHand.self_modulate = Color8(0, 0, 0, 165)

@@ -19,3 +19,4 @@ func _init(val, _type, _order=null, source=null):
 		self.order = int(_type)
 	else:
 		self.order = _order
+	self.source = source

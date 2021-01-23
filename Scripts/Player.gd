@@ -43,7 +43,6 @@ var lmb_pressed = false
 var shift_down = false
 
 var current_target = null
-
 var action_bar_skills = {
 	"Skill1": "Ice_Spear", 
 	"Skill2": "", 
@@ -79,9 +78,33 @@ var skills = []
 var time_since_last_tick = 0
 
 func _ready():
-	self.learned_skills["Ice_Spear"] = DataImport.skill_data["Ice_Spear"]
 	for stat in StatData.stat_data:
 		self.stats[stat] = CharacterStat.new(StatData.stat_data[stat]["StatBaseValue"])
+	
+	
+	var str_base = floor(self.stats["Strength"].value / 5)
+	var health_bonus = floor(self.stats["Strength"].value / 2)
+	var phys_bonus = str_base * 0.01
+	var health_mod = StatModifier.new(health_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Strength")
+	var phys_mod = StatModifier.new(phys_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Strength")
+	self.stats["Health"].add_modifier(health_mod)
+	self.stats["PhysicalDamage"].add_modifier(phys_mod)
+
+	var dex_base = floor(self.stats["Dexterity"].value / 5)
+	var armour_bonus = self.stats["Dexterity"].value * 2
+	var chc_bonus = dex_base * 0.1
+	var armour_mod = StatModifier.new(armour_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Dexterity")
+	var chc_mod = StatModifier.new(chc_bonus, StatModifier.STAT_MOD_TYPE.PercentAdd, int(StatModifier.STAT_MOD_TYPE.PercentAdd), "Dexterity")
+	self.stats["Armour"].add_modifier(armour_mod)
+	self.stats["CriticalHitChance"].add_modifier(chc_mod)
+
+	var int_base = floor(self.stats["Intelligence"].value / 5)
+	var mana_bonus = floor(self.stats["Intelligence"].value / 2)
+	var spell_bonus = int_base * 0.01
+	var mana_mod = StatModifier.new(mana_bonus, StatModifier.STAT_MOD_TYPE.Flat, int(StatModifier.STAT_MOD_TYPE.Flat), "Intelligence")
+	var spell_mod = StatModifier.new(spell_bonus, StatModifier.STAT_MOD_TYPE.PercentMult, int(StatModifier.STAT_MOD_TYPE.PercentMult), "Intelligence")
+	self.stats["Mana"].add_modifier(mana_mod)
+	self.stats["SpellDamage"].add_modifier(spell_mod)
 
 	self.current_health = self.stats["Health"].value
 	self.current_mana = self.stats["Mana"].value
@@ -278,13 +301,13 @@ func on_heal(heal):
 	self.update_health_orb()
 
 func update_health_orb():
-	self.health_text.text = str(self.current_health) + "/" + str(self.stats["Health"].value)
+	self.health_text.text = str(floor(self.current_health)) + "/" + str(floor(self.stats["Health"].value))
 	var percentage_hp = int((float(self.current_health) / self.stats["Health"].value) * 100)
 	health_tween.interpolate_property(health_orb, 'value', health_orb.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	health_tween.start()
 
 func update_mana_orb():
-	self.mana_text.text = str(self.current_mana) + "/" + str(self.stats["Mana"].value)
+	self.mana_text.text = str(floor(self.current_mana)) + "/" + str(floor(self.stats["Mana"].value))
 	var percentage_mp = int((float(self.current_mana) / self.stats["Mana"].value) * 100)
 	mana_tween.interpolate_property(mana_orb, 'value', mana_orb.value, percentage_mp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	mana_tween.start()
@@ -345,6 +368,7 @@ func _on_MeleeArea_body_entered(body):
 func use_skill(pressed_slot):
 	if !DataImport.skill_data.has(selected_skills[pressed_slot]):
 		return
+    
 	var mana_cost = DataImport.skill_data[selected_skills[pressed_slot]].SkillManaCost
 	if mana_cost > self.current_mana:
 		return
