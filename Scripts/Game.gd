@@ -8,9 +8,8 @@ onready var skill_screen = $CanvasLayer/UI/SkillTreeScreen
 onready var stat_window = $CanvasLayer/UI/StatScreen
 onready var ui_health_bar = $CanvasLayer/UI/EnemyHealthBar
 onready var ui_enemy_name = $CanvasLayer/UI/EnemyHealthBar/EnemyName
-onready var action_bar_skill_slots = $CanvasLayer/UI/ActionBarManaOverlay/Background/HBoxContainer
+onready var action_bar_skill_slots = $CanvasLayer/UI/ActionBarManaOverlay/Background/SkillSlots
 
-onready var skelly = preload("res://Scenes/NPC/Skeleton.tscn")
 var current_skill_tooltip = null
 
 var alt_pressed = false
@@ -51,11 +50,6 @@ func _unhandled_input(event):
 		if self.char_window.visible:
 			self.char_window.visible = false
 		self.skill_screen.update_info()
-
-	if Input.is_action_just_pressed("ui_skill8"):
-		var dooter = skelly.instance()
-		dooter.position = self.get_global_mouse_position()
-		$NavigationMap/YSort.add_child(dooter)
 	
 	if Input.is_action_just_pressed("ui_alt"):
 		self.alt_pressed = true

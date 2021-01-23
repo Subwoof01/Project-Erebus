@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 onready var ui = $UI
-onready var action_bar_path = "UI/ActionBarManaOverlay/HBoxContainer/"
+onready var action_bar_path = "UI/ActionBarManaOverlay/SkillSlots/"
 onready var player = self.get_tree().get_root().get_node("Game/NavigationMap/YSort/Player")
 onready var skill_tooltip = preload("res://Scenes/UI/SkillTooltip.tscn")
 
@@ -15,6 +15,9 @@ func load_shortcuts():
 	for shortcut in loaded_skills.keys():
 		var skill_icon = load("res://Sprites/UI/SkillIcons/" + loaded_skills[shortcut] + "_Icon.png")
 		self.get_node(action_bar_path + shortcut + "/SkillIcon").set_normal_texture(skill_icon)
+		for action in InputMap.get_action_list("ui_" + shortcut.to_lower()):
+			if action is InputEventKey:
+				self.get_node(action_bar_path + shortcut + "/Hotkey").text = OS.get_scancode_string(action.scancode)
 
 func show_skill_tooltip(skill_name):
 	if skill_name == "":
