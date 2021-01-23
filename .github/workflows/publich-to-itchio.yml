@@ -20,5 +20,5 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: project-erebus
           ITCH_USER: Subwoof01
-          PACKAGE: Project-Erebus.zip
+          PACKAGE: Project-Erebus-windows.zip
           VERSION: ${{ steps.download-windows.outputs.version }}
