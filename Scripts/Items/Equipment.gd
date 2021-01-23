@@ -135,12 +135,13 @@ func create_randomised_equipment(level):
 
 	# ItemDb.ITEMS[str(rng.randi_range(1, len(ItemDb.ITEMS) - 1))]
 	# ItemDb.ITEMS["1"]
-	var base_item = ItemDb.ITEMS[str(rng.randi_range(1, len(ItemDb.ITEMS) - 1))]
+	var base_item = ItemDb.EQUIPMENT[rng.randi_range(1, len(ItemDb.EQUIPMENT) - 1)]
 	self.item_name = base_item["ItemName"]
 	self.slot = base_item["slot"]
 	self.inventory_size = [base_item["width"], base_item["height"]]
 	self.type = "Equipment"
-	self.equipment_type = base_item["ItemType"]
+	print(base_item)
+	self.equipment_type = base_item["ItemEquipmentType"]
 	self.sub_type = base_item["ItemSubType"]
 	self.icon_path = "res://Sprites/Items/" + self.equipment_type + "/" + base_item["icon"] + ".png"
 	self.world_icon_path = "res://Sprites/Items/" + self.equipment_type + "/" + base_item["icon"] + "_World.png"
@@ -155,16 +156,16 @@ func create_randomised_equipment(level):
 	
 	var rare = self.rng.randf()
 	if rare <= self.rare_chance:
-		self.rarity = RARITY.Rare
+		self.rarity = Item.RARITY.Rare
 		self.prefix_slot_open = true
 		self.suffix_slot_open = true
 		self.affix_slots_open = 3
 	elif rare > self.rare_chance and rare <= self.rare_chance + self.magic_chance:
-		self.rarity = RARITY.Magic
+		self.rarity = Item.RARITY.Magic
 		self.prefix_slot_open = true
 		self.suffix_slot_open = true
 	else:
-		self.rarity = RARITY.Normal
+		self.rarity = Item.RARITY.Normal
 	
 	# if ItemModData.implicit_mods.has(base_item["Itemequipment_Name"]):
 	# 	self.mods[base_item["Itemequipment_Name"]

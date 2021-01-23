@@ -19,10 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/NPC/Enemy.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "Equipment",
 "language": "GDScript",
 "path": "res://Scripts/Items/Equipment.gd"
+}, {
+"base": "Node",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Scripts/Items/Item.gd"
 }, {
 "base": "Reference",
 "class": "StatModifier",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "CharacterStat": "",
 "Enemy": "",
 "Equipment": "",
+"Item": "",
 "StatModifier": ""
 }
 

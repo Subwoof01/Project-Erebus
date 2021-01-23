@@ -28,6 +28,10 @@ func setup(_item, game):
 	self.set_item_type(_item)
 
 	if _item.data.type == "Equipment":
+		$Tooltip/VBoxContainer/MainStat.visible = true
+		$Tooltip/VBoxContainer/Requirements.visible = true
+		$Tooltip/VBoxContainer/Divider.visible = true
+		$Tooltip/VBoxContainer/Divider2.visible = true
 		self.set_main_stat(_item.data)
 		for mod in _item.data.mods:
 			self.add_mod(mod, _item.data)
@@ -240,6 +244,8 @@ func set_item_type(item):
 		else:
 			$Tooltip/VBoxContainer/Type.text = item.data.sub_type
 		self.item_type = item.data.equipment_type
+	else:
+		$Tooltip/VBoxContainer/Type.text = item.data.type
 
 func set_main_stat(item, type_=self.item_type):
 	if item.type == "Equipment":
