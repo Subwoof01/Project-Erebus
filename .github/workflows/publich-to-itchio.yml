@@ -10,9 +10,8 @@ jobs:
         id: download-windows
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          file: Project-Erebus.zip
-        env:
-          GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
+          file: "Project-Erebus.zip"
+          token: ${{ secrets.GH_CREDENTIALS }}
       - name: Deploy to itch.io (Windows)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
