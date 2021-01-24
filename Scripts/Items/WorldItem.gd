@@ -2,9 +2,9 @@ extends Node2D
 
 onready var sprite = $Sprite
 onready var animation = $Sprite/AnimationPlayer
-onready var name_label = $Control/ItemName
+onready var name_label = $Control/RigidBody2D/ItemName
 onready var tooltip_shape = $Control/ClickArea2/TooltipShape
-onready var tooltip_bg = $Control/ItemName/Panel
+onready var tooltip_bg = $Control/RigidBody2D/ItemName/Panel
 
 var base_name_colour = "96000000"
 var highlight_colour = "96ffa200"
@@ -19,9 +19,18 @@ func _process(delta):
 		else:
 			self.name_label.text = self.item_data.item_name
 		self.name_label.rect_position.x = self.name_label.rect_size.x * 0.5 * -1
+		$Control/RigidBody2D/CollisionShape2D.shape.extents = Vector2(
+			tooltip_bg.rect_size.x * 0.5,
+			tooltip_bg.rect_size.y * 0.5
+		)
+		$Control/RigidBody2D/CollisionShape2D.position = Vector2(
+			0,
+			name_label.rect_position.y - name_label.rect_position.y * 0.25
+		)
 		self.name_label.visible = true
 	else:
 		self.name_label.visible = false
+		self.tooltip_bg.self_modulate = Color(self.base_name_colour)
 
 func show():
 	self.sprite.material.set_shader_param("draw_outline", true)
