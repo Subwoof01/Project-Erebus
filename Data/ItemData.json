@@ -2,20 +2,26 @@
   "0": {
     "ItemName": "error",
     "icon": "ErrorIcon",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": "NONE",
     "width": 1,
     "height": 1,
-    "ItemType": "NONE",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "NONE",
     "ItemSubType": "NONE",
     "ItemBaseStatRequirement": "NONE"
   },
   "1": {
     "ItemName": "Breastplate",
     "icon": "ChestArmour01",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": "Chest",
     "width": 2,
     "height": 3,
-    "ItemType": "Armour",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "Armour",
     "ItemSubType": "Chestplate",
     "ItemBaseArmour": [
       2,
@@ -26,13 +32,16 @@
   "2": {
     "ItemName": "Broadsword",
     "icon": "1HSword01",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": [
       "MainHand",
       "OffHand"
     ],
     "width": 1,
     "height": 2,
-    "ItemType": "Weapon",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "Weapon",
     "ItemSubType": "Sword",
     "ItemBaseDamage": [
       1,
@@ -45,10 +54,13 @@
   "3": {
     "ItemName": "Kite Shield",
     "icon": "KiteShield01",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": "OffHand",
     "width": 2,
     "height": 3,
-    "ItemType": "Shield",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "Shield",
     "ItemSubType": "Kite Shield",
     "ItemBaseBlockChance": [
       0.05,
@@ -59,16 +71,21 @@
   "4": {
     "ItemName": "Lapis Amulet",
     "icon": "Necklace01",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": "Neck",
     "width": 1,
     "height": 1,
-    "ItemType": "Jewelry",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "Jewelry",
     "ItemSubType": "Necklace",
     "ItemBaseStatRequirement": "Intelligence"
   },
   "5": {
     "ItemName": "Longsword",
     "icon": "2HSword01",
+    "Stackable": false,
+    "MaxStack": 1,
     "slot": [
       "MainHand",
       "OffHand"
@@ -76,7 +93,8 @@
     "ItemIsTwoHanded": true,
     "width": 2,
     "height": 3,
-    "ItemType": "Weapon",
+    "ItemType": "Equipment",
+    "ItemEquipmentType": "Weapon",
     "ItemSubType": "Sword",
     "ItemBaseDamage": [
       6,
@@ -85,5 +103,15 @@
       20
     ],
     "ItemBaseStatRequirement": "Strength"
+  },
+  "6": {
+    "ItemName": "Rune",
+    "icon": "Rune",
+    "Stackable": true,
+    "MaxStack": 3,
+    "slot": "NONE",
+    "width": 1,
+    "height": 1,
+    "ItemType": "Currency"
   }
 }

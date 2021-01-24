@@ -22,7 +22,7 @@ __meta__ = {
 [node name="Tooltip" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 267.0
-margin_bottom = 167.0
+margin_bottom = 36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -117,7 +117,6 @@ rect_min_size = Vector2( 0, 19 )
 theme = ExtResource( 7 )
 custom_colors/font_color = Color( 0.72549, 0.72549, 0.72549, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "ITEM_TYPE"
 align = 1
 clip_text = true
 __meta__ = {
@@ -132,7 +131,6 @@ rect_min_size = Vector2( 0, 19 )
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 0.72549, 0.72549, 0.72549, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "ITEM_TYPE"
 align = 1
 clip_text = true
 __meta__ = {
@@ -140,6 +138,7 @@ __meta__ = {
 }
 
 [node name="MainStat" type="RichTextLabel" parent="Tooltip/VBoxContainer"]
+visible = false
 margin_top = 99.0
 margin_right = 267.0
 margin_bottom = 136.0
@@ -154,6 +153,7 @@ __meta__ = {
 }
 
 [node name="Requirements" type="RichTextLabel" parent="Tooltip/VBoxContainer"]
+visible = false
 margin_top = 136.0
 margin_right = 267.0
 margin_bottom = 173.0
@@ -168,9 +168,10 @@ __meta__ = {
 }
 
 [node name="Divider" type="TextureRect" parent="Tooltip/VBoxContainer"]
-margin_top = 173.0
+visible = false
+margin_top = 36.0
 margin_right = 267.0
-margin_bottom = 175.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
 expand = true
@@ -193,9 +194,10 @@ __meta__ = {
 }
 
 [node name="Divider2" type="TextureRect" parent="Tooltip/VBoxContainer"]
-margin_top = 175.0
+visible = false
+margin_top = 36.0
 margin_right = 267.0
-margin_bottom = 177.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
 expand = true

@@ -112,6 +112,8 @@ func enable_off_hand():
 	self.off_hand_disabled = false
 
 func insert_item_assigned_slot(item):
+	if item.data.type != "Equipment":
+		return
 	var slot
 
 	if typeof(item.data.slot) == TYPE_ARRAY:

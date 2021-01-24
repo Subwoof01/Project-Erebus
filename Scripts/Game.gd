@@ -17,7 +17,9 @@ var current_mouse_over_target = null
 
 func _ready():
 	for i in range(10):
-		ItemManager.spawn_item(player.global_position)
+		# ItemManager.spawn_item(player.global_position)
+		var item = Item.new()
+		ItemManager.spawn_item(player.global_position, item.create_item(6))
 
 func _process(delta):
 	if self.current_mouse_over_target != null:
