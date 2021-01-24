@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Sprites/Light.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/NPC/Skeleton.tscn" type="PackedScene" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=25]
 [ext_resource path="res://Resources/UI_Font_22.tres" type="Theme" id=26]
 [ext_resource path="res://Scenes/UI/SkillTreeScreen.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Sprites/UI/Main/Circle_X.png" type="Texture" id=28]
 [ext_resource path="res://Scripts/UI/SkillSelection.gd" type="Script" id=29]
 
 [sub_resource type="DynamicFont" id=1]
@@ -705,7 +704,6 @@ __meta__ = {
 margin_right = 50.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-texture = ExtResource( 28 )
 expand = true
 [connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 0 ]]
 [connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
