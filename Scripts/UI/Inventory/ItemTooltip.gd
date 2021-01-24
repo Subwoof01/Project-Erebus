@@ -36,6 +36,10 @@ func setup(_item, game):
 		for mod in _item.data.mods:
 			self.add_mod(mod, _item.data)
 		self.set_requirements(_item.data)
+	else:
+		$Tooltip/VBoxContainer/MainStat.visible = true
+		var s = "[center]" + str(_item.data.amount) + "/" + str(_item.data.max_stack) + "[/center]"
+		$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
 
 	self.scale_tooltip()
 

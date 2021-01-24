@@ -699,6 +699,12 @@ script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NoSkill" type="TextureRect" parent="CanvasLayer/UI/SkillSelection"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+expand = true
 [connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 0 ]]
 [connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
 [connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_exited"]
@@ -723,3 +729,4 @@ __meta__ = {
 [connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 7 ]]
 [connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="." method="_on_Skill_mouse_entered" binds= [ 7 ]]
 [connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill8" to="." method="_on_Skill_mouse_exited"]
+[connection signal="gui_input" from="CanvasLayer/UI/SkillSelection/NoSkill" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_click" binds= [ "NONE" ]]
