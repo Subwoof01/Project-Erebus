@@ -17,18 +17,18 @@ var current_mouse_over_target = null
 
 func _ready():
 	for i in range(10):
-		# ItemManager.spawn_item(player.global_position)
-		var item = Item.new()
-		ItemManager.spawn_item(player.global_position, item.create_item(6))
+		ItemManager.spawn_item(player.global_position)
+		# var item = Item.new()
+		# ItemManager.spawn_item(player.global_position, item.create_item(6))
 
 func _process(delta):
 	if self.current_mouse_over_target != null:
 		self.set_ui_health_bar_info()
 	var screen_space = self.get_world_2d().direct_space_state
-	var ray_cast = screen_space.intersect_point(self.get_global_mouse_position(), 1, [self.player], 16)
+	var ray_cast = screen_space.intersect_point(self.get_global_mouse_position(), 1, [self.player], 16, false, true)
 	for body in ray_cast:
 		if body.collider.is_in_group("Enemies"):
-			self.current_mouse_over_target = body.collider
+			self.current_mouse_over_target = body.collider.get_parent()
 			self.ui_health_bar.visible = true
 			self.current_mouse_over_target.shader_material.set_shader_param("draw_outline", true)
 	if len(ray_cast) == 0 and self.current_mouse_over_target != null:
@@ -37,7 +37,6 @@ func _process(delta):
 		self.ui_health_bar.visible = false
 
 func _unhandled_input(event):
-	self.player.handle_inputs()
 	if Input.is_action_just_pressed("ui_char_window"):
 		self.char_window.visible = !self.char_window.visible
 		if self.skill_screen.visible:
@@ -59,6 +58,7 @@ func _unhandled_input(event):
 	if Input.is_action_just_released("ui_alt"):
 		self.alt_pressed = false
 		ItemManager.alt_down = false
+	self.player.handle_inputs()
 		
 func set_ui_health_bar_info():
 	if self.current_mouse_over_target.current_health <= 0:

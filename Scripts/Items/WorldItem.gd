@@ -59,6 +59,7 @@ func _on_ClickArea_input_event(viewport, event: InputEvent, shape_idx):
 
 func _on_Panel_gui_input(event: InputEvent):
 	if event.is_action_pressed("ui_left_mouse_button"):
+		print("Name panel clicked")
 		self.pick_up()
 		
 func pick_up():

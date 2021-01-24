@@ -180,12 +180,12 @@ func on_death():
 func on_hit(damage, type, crit=false):
 	for t in type:
 		if self.defensives.keys().has(t):
-			damage *= 1 - self.defensives[t]
-	self.current_health -= damage
+			damage["damage"] *= 1 - self.defensives[t]
+	self.current_health -= damage["damage"]
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
 	var text = self.floating_text.instance()
-	text.amount = damage
+	text.amount = damage["damage"]
 	text.is_crit = crit
 	self.add_child(text)
 	if (current_health <= 0):

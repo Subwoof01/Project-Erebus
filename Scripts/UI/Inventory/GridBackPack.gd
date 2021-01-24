@@ -83,6 +83,8 @@ func get_item_under_pos(pos):
 	return null
 
 func increase_item_amount(item, amount):
+	if !item.data.stackable:
+		return
 	item.data.amount += amount
 	if len(item.get_children()) == 0:
 		var label = Label.new()

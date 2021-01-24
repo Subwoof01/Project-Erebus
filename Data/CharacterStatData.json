@@ -24,7 +24,7 @@
     "StatBaseValue": 2
   },
   "PhysicalDamage": {
-    "StatBaseValue": 0
+    "StatBaseValue": 1
   },
   "CriticalHitChance": {
     "StatBaseValue": 100
