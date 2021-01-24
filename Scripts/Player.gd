@@ -26,7 +26,7 @@ var stats = {}
 var current_health
 var current_mana
 
-var movement_margin = 2
+var movement_margin = 3
 
 var action_queue = []
 
@@ -76,6 +76,7 @@ onready var rng = RandomNumberGenerator.new()
 
 var skills = []
 var time_since_last_tick = 0
+var movement_locked = false
 
 func _ready():
 	for stat in StatData.stat_data:
@@ -128,17 +129,18 @@ func _process(delta):
 		self.lmb_pressed = false
 		self.location = self.action_queue[2].global_position
 		self.state = self.STATE.Walking
+		self.movement_locked = false
 		return
 	if self.lmb_pressed:
 		if self.can_strike:
 			var space_state = self.get_world_2d().direct_space_state
-			var check = space_state.intersect_point(self.get_global_mouse_position(), 2, [self], 16)
+			var check = space_state.intersect_point(self.get_global_mouse_position(), 2, [self], 16, false, true)
 			for body in check:
 				if body.collider.is_in_group("Enemies"):
-					if body.collider.get_node("Collision") in self.things_in_interact_range:
-						self.melee_strike(body.collider)
-						break;
-					self.queue_action("strike", body.collider, body.collider)
+					if body.collider.get_parent() in self.things_in_interact_range:
+						self.melee_strike(body.collider.get_parent())
+						return;
+					self.queue_action("strike", body.collider, body.collider.get_parent())
 		if self.shift_down:
 			self.melee_strike()
 		else:
@@ -173,9 +175,10 @@ func _physics_process(delta):
 func handle_inputs():
 	if Input.is_action_just_released("ui_left_mouse_button"):
 		self.lmb_pressed = false
-	if Input.is_action_just_pressed("ui_left_mouse_button"):
-		self.action_queue = []
-		self.lmb_pressed = true
+	if !self.movement_locked:
+		if Input.is_action_just_pressed("ui_left_mouse_button"):
+			self.action_queue = []
+			self.lmb_pressed = true
 	if Input.is_action_just_released("ui_shift"):
 		self.shift_down = false
 	if Input.is_action_just_pressed("ui_shift"):
@@ -216,9 +219,11 @@ func _on_InteractRange_body_exited(body):
 	self.things_in_interact_range.remove(self.things_in_interact_range.find(body))
 
 func queue_action(action, object, interact_checker):
+	self.lmb_pressed = false
 	self.action_queue.append(action)
 	self.action_queue.append(object)
 	self.action_queue.append(interact_checker)
+	self.movement_locked = true
 
 func restore_mana(amount):
 	self.current_mana += amount
@@ -248,8 +253,11 @@ func pickup(item):
 func execute_queued_action():
 	match self.action_queue[0]:
 		"pickup":
+			self.speed = 0
 			ItemManager.pickup(self.action_queue[1])
 			self.action_queue = []
+			self.animation_mode.travel("Idle")
+			self.state = STATE.Idle
 		"strike":
 			self.melee_strike(self.action_queue[1])
 			self.action_queue = []
@@ -278,6 +286,7 @@ func damage(type, can_crit=true, b=[0,0]):
 
 	if is_crit:
 		damage *= self.stats["CriticalHitDamage"].value
+
 	return {"damage": damage, "crit": is_crit, "minmax": [base[0], base[1]]}
 
 
@@ -363,7 +372,7 @@ func melee_strike(target=null):
 	self.MAX_SPEED = 180
 
 func _on_MeleeArea_body_entered(body):
-	body.get_parent().on_hit(self.damage(["Physical"], true, [self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value]))
+	body.on_hit(self.damage(["Physical"], true, [self.stats["PhysicalDamageMin"].value, self.stats["PhysicalDamageMax"].value]), "Physical")
 
 func use_skill(pressed_slot):
 	if !DataImport.skill_data.has(selected_skills[pressed_slot]):
@@ -427,7 +436,6 @@ func use_skill(pressed_slot):
 			skill_instance.skill_name = selected_skills[pressed_slot]
 			self.add_child(skill_instance)
 
-	# print($TurnAxis.get_angle_to(get_global_mouse_position()))
 	self.animation_mode.travel("Casting")
 	self.lose_mana(mana_cost)
 	yield(self.get_tree().create_timer(skill_instance.skill_cast_time), "timeout")
