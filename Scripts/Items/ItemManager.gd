@@ -46,5 +46,3 @@ func pickup(item):
 		item.world_sprite.queue_free()
 	else:
 		self.spawn_item(self.game.player.global_position, item, 1)
-
-	print(str(len(self.world_items)))

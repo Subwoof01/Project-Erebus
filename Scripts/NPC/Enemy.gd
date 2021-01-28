@@ -7,7 +7,8 @@ enum STATE {
 	Casting,
 	Attacking,
 	Searching,
-	Dead
+	Dead,
+	Approaching
 }
 
 const ACCELERATION = 45
@@ -82,6 +83,10 @@ func _process(delta):
 		STATE.Searching:
 			self.animation_mode.travel("Walking")
 			self.search(delta)
+		STATE.Approaching:
+			self.animation_mode.travel("Walking")
+			self.destination = self.nav_map.get_closest_point(self.player.global_position)
+			self.approach(delta)
 		
 func _physics_process(delta):
 	self.sight_check()
@@ -97,6 +102,8 @@ func sight_check():
 				self.destination = self.nav_map.get_closest_point(self.player.global_position)
 				if self.is_player_in_strike_range:
 					self.state = STATE.Attacking
+				else:
+					self.state = STATE.Approaching
 			else:
 				self.is_player_in_sight = false
 				if self.is_player_seen:
@@ -153,6 +160,12 @@ func move(delta) -> PoolVector2Array:
 		path_to_destination.remove(0)
 
 	return path_to_destination
+
+func approach(delta):
+	if self.is_player_in_strike_range:
+		self.state = STATE.Attacking
+		return
+	self.move(delta)
 
 func search(delta):
 	var path = self.move(delta)

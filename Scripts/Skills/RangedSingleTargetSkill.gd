@@ -18,7 +18,6 @@ func _ready():
 	if self.origin == "Player":
 		self.set_collision_mask_bit(1, false)
 	elif self.origin == "Enemy":
-		self.set_collision_mask_bit(2, false)
 		self.set_collision_mask_bit(4, false)
 	var skill_data = DataImport.skill_data[skill_name]
 	self.projectile_speed = skill_data.SkillProjectileSpeed
