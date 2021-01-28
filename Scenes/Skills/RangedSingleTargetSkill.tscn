@@ -62,5 +62,6 @@ polygon = PoolVector2Array( -8.18633, -4.42373, 13.5572, 1.94023, -8.36311, 8.12
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "Ice_Spear"
+frame = 7
 playing = true
 [connection signal="body_entered" from="." to="." method="_on_Spell_body_entered"]

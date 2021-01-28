@@ -12,6 +12,9 @@ var item_data
 var item_ui
 var info_set = false
 
+func _ready():
+	$Control/RigidBody2D/CollisionShape2D.shape = RectangleShape2D.new()
+
 func _process(delta):
 	if ItemManager.alt_down:
 		if self.item_data.amount > 1:
@@ -28,7 +31,9 @@ func _process(delta):
 			name_label.rect_position.y - name_label.rect_position.y * 0.25
 		)
 		self.name_label.visible = true
+		$Control/RigidBody2D/CollisionShape2D.disabled = false
 	else:
+		$Control/RigidBody2D/CollisionShape2D.disabled = true
 		self.name_label.visible = false
 		self.tooltip_bg.self_modulate = Color(self.base_name_colour)
 
@@ -39,7 +44,6 @@ func show():
 func hide():
 	self.sprite.material.set_shader_param("draw_outline", false)
 	self.tooltip_bg.self_modulate = Color(self.base_name_colour)
-
 
 func _on_ClickArea_mouse_entered():
 	self.show()
