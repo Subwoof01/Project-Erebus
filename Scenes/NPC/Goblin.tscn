@@ -1222,7 +1222,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 32
-frame = 1
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Cast_Bottom = SubResource( 1 )
@@ -1323,7 +1323,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="HealthBar"]
 
 [node name="Sight" type="Area2D" parent="."]
-visible = false
 show_behind_parent = true
 collision_layer = 0
 collision_mask = 2

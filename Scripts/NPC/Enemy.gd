@@ -85,7 +85,6 @@ func _process(delta):
 			self.search(delta)
 		STATE.Approaching:
 			self.animation_mode.travel("Walking")
-			self.destination = self.nav_map.get_closest_point(self.player.global_position)
 			self.approach(delta)
 		
 func _physics_process(delta):
@@ -162,10 +161,15 @@ func move(delta) -> PoolVector2Array:
 	return path_to_destination
 
 func approach(delta):
+	if !self.is_player_in_sight:
+		self.state = STATE.Idle
+		return
 	if self.is_player_in_strike_range:
 		self.state = STATE.Attacking
 		return
-	self.move(delta)
+	var path = self.move(delta)
+	if path.size() == 0:
+		self.state = STATE.Idle
 
 func search(delta):
 	var path = self.move(delta)
@@ -185,8 +189,8 @@ func on_death():
 	self.is_player_in_range = false
 	self.sight_range.get_child(0).disabled = true
 	self.attack_range.get_child(0).disabled = true
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Collision/CollisionPolygon2D.set_deferred("disabled", true)
+	$CollisionPolygon2D.set_deferred("disabled", true)
+	$Collision/CollisionShape2D.set_deferred("disabled", true)
 	self.animation_mode.travel("Death")
 	self.player.gain_exp(self.base_exp, self.level)
 
