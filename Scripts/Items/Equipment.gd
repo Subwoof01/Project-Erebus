@@ -140,7 +140,7 @@ func create_randomised_equipment(level):
 	self.slot = base_item["slot"]
 	self.inventory_size = [base_item["width"], base_item["height"]]
 	self.type = "Equipment"
-	print(base_item)
+	# print(base_item)
 	self.equipment_type = base_item["ItemEquipmentType"]
 	self.sub_type = base_item["ItemSubType"]
 	self.icon_path = "res://Sprites/Items/" + self.equipment_type + "/" + base_item["icon"] + ".png"

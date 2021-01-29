@@ -170,7 +170,7 @@ func insert_item(item):
 		return false
 
 	var item_slot = item.data.slot
-	print(item_slot)
+	# print(item_slot)
 	var slot_found = false
 	var found_slot = item_slot
 

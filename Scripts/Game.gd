@@ -61,7 +61,8 @@ func _unhandled_input(event):
 		self.skill_screen.update_info()
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		self.last_openened_menu.visible = false
+		if self.last_openened_menu != null:
+			self.last_openened_menu.visible = false
 	
 	if Input.is_action_just_pressed("ui_space"):
 		self.skill_screen.visible = false

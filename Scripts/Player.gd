@@ -15,7 +15,7 @@ onready var animation_mode = animation_tree.get("parameters/playback")
 onready var animation_player = $AnimationPlayer
 
 var p_name = "Player_Name"
-var level = 3
+var level = 1
 var total_exp = 0
 var experience = 0
 var next_level_exp = 1500
@@ -299,7 +299,12 @@ func take_damage(damage, _type):
 	self.current_health -= damage["damage"];
 	if self.current_health <= 0:
 		self.current_health = 0
+		self.die()
 	self.update_health_orb()
+
+func die():
+	self.game.get_node("CanvasLayer/UI/DeathScreen").visible = true
+	self.get_tree().paused = true
 
 func lose_mana(cost):
 	self.current_mana -= cost

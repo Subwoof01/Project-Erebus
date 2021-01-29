@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Sprites/Light.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/NPC/Skeleton.tscn" type="PackedScene" id=2]
@@ -30,11 +30,25 @@
 [ext_resource path="res://Scenes/NPC/Goblin.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scripts/UI/SkillSelection.gd" type="Script" id=29]
 [ext_resource path="res://Sprites/UI/Main/Circle_X.png" type="Texture" id=30]
+[ext_resource path="res://Scripts/UI/DeathScreen.gd" type="Script" id=31]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 24 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.392157 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 128
+use_filter = true
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 72
 use_filter = true
 font_data = ExtResource( 24 )
 
@@ -711,6 +725,36 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 30 )
 expand = true
+
+[node name="DeathScreen" type="Panel" parent="CanvasLayer/UI"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/DeathScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "YOU DIED"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/UI/DeathScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "
+
+
+Press 'ESC' to restart."
+align = 1
+valign = 1
 [connection signal="gui_input" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="CanvasLayer/UI/SkillSelection" method="_on_Skill_gui_input" binds= [ 0 ]]
 [connection signal="mouse_entered" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_entered" binds= [ 0 ]]
 [connection signal="mouse_exited" from="CanvasLayer/UI/ActionBarManaOverlay/SkillSlots/Skill1" to="." method="_on_Skill_mouse_exited"]
