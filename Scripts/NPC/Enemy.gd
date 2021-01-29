@@ -222,3 +222,8 @@ func update_health_bar():
 	self.bar_tween.interpolate_property(self.health_bar, 'value', self.health_bar.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	self.bar_tween.start()
 
+func _on_Collision_body_entered(body):
+	if body.is_in_group("SingleTargetSpell"):
+		self.on_hit(body.damage.duplicate(), body.damage_type, body.crit)
+		body.get_node("CollisionPolygon2D").disabled = true
+		body.hide()

@@ -7,7 +7,7 @@ export var life_time = 3
 export var skill_cast_time = 0.4
 export var skill_projectile_acceleration = 0
 export var skill_projectile_delay = 0
-var damage_type = ""
+var damage_type = ["Lightning"]
 var crit = false
 
 var origin
@@ -15,10 +15,11 @@ var origin
 var accelerate = false
 
 func _ready():
+	self.damage = {"damage": 50, "crit": false, "minmax": [50, 50]}
 	if self.origin == "Player":
 		self.set_collision_mask_bit(1, false)
 	elif self.origin == "Enemy":
-		self.set_collision_mask_bit(2, false)
+		self.set_collision_mask_bit(16, false)
 	var skill_data = DataImport.skill_data[skill_name]
 	self.projectile_speed = skill_data.SkillProjectileSpeed
 	self.skill_cast_time = skill_data.SkillCastTime
@@ -36,10 +37,8 @@ func self_destruct():
 
 func _on_Spell_body_entered(body):
 	$CollisionPolygon2D.set_deferred("disabled", true)
-	if body.is_in_group("Enemies"):
-		body.on_hit({"damage": 50, "crit": false, "minmax": [50, 50]}, self.damage_type, self.crit)
-	elif body.is_in_group("Player"):
-		body.take_damage(self.damage)
+	if body.is_in_group("Player"):
+		body.take_damage(self.damage.duplicate(), self.damage_type)
 	self.hide()
 
 func _process(delta):

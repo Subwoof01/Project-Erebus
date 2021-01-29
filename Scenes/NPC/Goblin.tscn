@@ -1199,7 +1199,7 @@ graph_offset = Vector2( -335, -1 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=117]
 
 [sub_resource type="RectangleShape2D" id=118]
-extents = Vector2( 13.7344, 27.4914 )
+extents = Vector2( 13.7344, 21.4358 )
 
 [sub_resource type="CircleShape2D" id=119]
 radius = 525.0
@@ -1222,7 +1222,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 32
-frame = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Cast_Bottom = SubResource( 1 )
@@ -1292,7 +1292,6 @@ polygon = PoolVector2Array( -16, 0, -12, -6, 0, -8, 12, -6, 16, 0, 12, 8, 0, 10,
 [node name="Collision" type="Area2D" parent="." groups=[
 "Enemies",
 ]]
-visible = false
 collision_layer = 2147483664
 collision_mask = 16
 
@@ -1363,6 +1362,7 @@ disabled = true
 
 [node name="Center" type="Position2D" parent="."]
 position = Vector2( 0, -12 )
+[connection signal="body_entered" from="Collision" to="." method="_on_Collision_body_entered"]
 [connection signal="body_entered" from="Sight" to="." method="_on_Sight_body_entered"]
 [connection signal="body_exited" from="Sight" to="." method="_on_Sight_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_StrikeRange_body_entered"]

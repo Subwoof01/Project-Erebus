@@ -15,6 +15,8 @@ var current_skill_tooltip = null
 var alt_pressed = false
 var current_mouse_over_target = null
 
+var last_openened_menu = null
+
 func _ready():
 	for i in range(10):
 		ItemManager.spawn_item(player.global_position)
@@ -39,19 +41,33 @@ func _process(delta):
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_char_window"):
 		self.char_window.visible = !self.char_window.visible
+		if self.char_window.visible:
+			self.last_openened_menu = self.char_window
 		if self.skill_screen.visible:
 			self.skill_screen.visible = false
 		self.char_window.on_show()
 	
 	if Input.is_action_just_pressed("ui_inventory_window"):
 		self.inventory_window.visible = !self.inventory_window.visible
+		if self.inventory_window.visible:
+			self.last_openened_menu = self.inventory_window
 
 	if Input.is_action_just_pressed("ui_skill_screen"):
 		self.skill_screen.visible = !self.skill_screen.visible
+		if self.skill_screen.visible:
+			self.last_openened_menu = self.skill_screen
 		if self.char_window.visible:
 			self.char_window.visible = false
 		self.skill_screen.update_info()
 	
+	if Input.is_action_just_pressed("ui_cancel"):
+		self.last_openened_menu.visible = false
+	
+	if Input.is_action_just_pressed("ui_space"):
+		self.skill_screen.visible = false
+		self.inventory_window.visible = false
+		self.skill_screen.visible = false
+
 	if Input.is_action_just_pressed("ui_alt"):
 		self.alt_pressed = true
 		ItemManager.alt_down = true

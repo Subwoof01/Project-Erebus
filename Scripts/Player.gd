@@ -290,8 +290,13 @@ func damage(type, can_crit=true, b=[0,0]):
 	return {"damage": damage, "crit": is_crit, "minmax": [base[0], base[1]]}
 
 
-func take_damage(damage):
-	self.current_health -= damage;
+func take_damage(damage, _type):
+	for t in _type:
+		if t == "Physical":
+			break
+		damage["damage"] *= 1 - self.stats[t + "Resistance"].value
+
+	self.current_health -= damage["damage"];
 	if self.current_health <= 0:
 		self.current_health = 0
 	self.update_health_orb()
