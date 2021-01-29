@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 export var skill_name = ""
-var damage
+var damage = {"damage": 50, "crit": false, "minmax": [50, 50]}
 export var projectile_speed = 400
 export var life_time = 3
 export var skill_cast_time = 0.4
@@ -15,7 +15,6 @@ var origin
 var accelerate = false
 
 func _ready():
-	self.damage = {"damage": 50, "crit": false, "minmax": [50, 50]}
 	if self.origin == "Player":
 		self.set_collision_mask_bit(1, false)
 	elif self.origin == "Enemy":

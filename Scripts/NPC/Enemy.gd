@@ -27,6 +27,7 @@ onready var player = self.get_parent().get_node("Player")
 onready var nav_map: Navigation2D = self.get_parent().get_parent()
 onready var sight_range = $Sight
 onready var attack_range = $AttackRange
+onready var rng = RandomNumberGenerator.new()
 
 export var monster_name = ""
 export var max_health = 100
@@ -193,16 +194,20 @@ func on_death():
 	$Collision/CollisionShape2D.set_deferred("disabled", true)
 	self.animation_mode.travel("Death")
 	self.player.gain_exp(self.base_exp, self.level)
+	self.rng.randomize()
+	var item_count = self.rng.randi_range(0, 3)
+	for i in item_count:
+		ItemManager.spawn_item(self.global_position, self.level)
 
 func on_hit(damage, type, crit=false):
 	for t in type:
 		if self.defensives.keys().has(t):
-			damage["damage"] *= 1 - self.defensives[t]
-	self.current_health -= damage["damage"]
+			damage *= 1 - self.defensives[t]
+	self.current_health -= damage
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
 	var text = self.floating_text.instance()
-	text.amount = damage["damage"]
+	text.amount = damage
 	text.is_crit = crit
 	self.add_child(text)
 	if (current_health <= 0):
@@ -224,6 +229,6 @@ func update_health_bar():
 
 func _on_Collision_body_entered(body):
 	if body.is_in_group("SingleTargetSpell"):
-		self.on_hit(body.damage.duplicate(), body.damage_type, body.crit)
+		self.on_hit(body.damage, body.damage_type, body.crit)
 		body.get_node("CollisionPolygon2D").disabled = true
 		body.hide()
