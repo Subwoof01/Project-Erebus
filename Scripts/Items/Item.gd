@@ -22,6 +22,7 @@ var max_stack
 
 func create_item(id) -> Item:
 	var item_data = ItemDb.ITEMS[str(id)]
+	print(item_data)
 	self.item_name = item_data["ItemName"]
 	self.level = 1
 	self.rarity = RARITY.Normal

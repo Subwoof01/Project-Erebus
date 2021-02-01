@@ -12,7 +12,6 @@ enum STATE {
 }
 
 const ACCELERATION = 45
-const MAX_SPEED = 120
 
 
 onready var floating_text = preload("res://Scenes/UI/FloatingText.tscn")
@@ -30,6 +29,8 @@ onready var attack_range = $AttackRange
 onready var rng = RandomNumberGenerator.new()
 
 export var monster_name = ""
+export var MAX_SPEED = 80
+export var wanders = false
 export var max_health = 100
 export var level = 1
 export var base_exp = 100
@@ -76,8 +77,11 @@ func _process(delta):
 				self.destination = self.nav_map.get_closest_point(Mathf.randv_circle(self.sight_range.get_child(0).shape.radius * 0.5, self.sight_range.get_child(0).shape.radius))
 				self.state = STATE.Wandering
 		STATE.Wandering:
-			self.animation_mode.travel("Walking")
-			self.wander(delta)
+			if self.wanders:
+				self.animation_mode.travel("Walking")
+				self.wander(delta)
+			else:
+				self.state = STATE.Idle
 		STATE.Attacking:			
 			self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.player.global_position).normalized())
 			self.attack()
@@ -202,12 +206,12 @@ func on_death():
 func on_hit(damage, type, crit=false):
 	for t in type:
 		if self.defensives.keys().has(t):
-			damage *= 1 - self.defensives[t]
-	self.current_health -= damage
+			damage["damage"] *= 1 - self.defensives[t]
+	self.current_health -= damage["damage"]
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
 	var text = self.floating_text.instance()
-	text.amount = damage
+	text.amount = damage["damage"]
 	text.is_crit = crit
 	self.add_child(text)
 	if (current_health <= 0):

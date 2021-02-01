@@ -135,7 +135,15 @@ func create_randomised_equipment(level):
 
 	# ItemDb.ITEMS[str(rng.randi_range(1, len(ItemDb.ITEMS) - 1))]
 	# ItemDb.ITEMS["1"]
-	var base_item = ItemDb.EQUIPMENT[rng.randi_range(1, len(ItemDb.EQUIPMENT) - 1)]
+	var base_item
+	if self.item_name != "":
+		for item in ItemDb.EQUIPMENT:
+			if item["ItemName"] == self.item_name:
+				base_item = item
+				break
+	else:
+		base_item = ItemDb.EQUIPMENT[rng.randi_range(1, len(ItemDb.EQUIPMENT) - 1)]
+		
 	self.item_name = base_item["ItemName"]
 	self.slot = base_item["slot"]
 	self.inventory_size = [base_item["width"], base_item["height"]]

@@ -11,7 +11,7 @@ func _ready():
 func _on_Skill_gui_input(event, skill_slot):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		self.selected_slot = skill_slot
-		print(self.game.player.learned_skills.keys())
+		# print(self.game.player.learned_skills.keys())
 		for skill in self.game.player.learned_skills:
 			if self.selectable_skills.has(skill):
 				continue

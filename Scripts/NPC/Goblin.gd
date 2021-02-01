@@ -3,9 +3,6 @@ extends Enemy
 var can_attack = true
 
 func _ready():
-	print("-- GOBLIN --")
-	print(self.collision_layer)
-	print(self.collision_mask)
 	._ready()
 	self.level = 1
 	self.base_exp = 100
@@ -27,4 +24,4 @@ func attack():
 
 func _on_MeleeCheck_body_entered(body):
 	if body == self.player:
-		body.take_damage(20)
+		body.take_damage({"damage": 10}, ["Physical"])

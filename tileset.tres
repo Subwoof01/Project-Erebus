@@ -911,8 +911,8 @@ points = PoolVector2Array( 62.6085, 111.613, 66.6784, 109.287, 69.0041, 112.582,
 16/autotile/z_index_map = [  ]
 16/occluder_offset = Vector2( 0, 0 )
 16/navigation_offset = Vector2( 0, 0 )
-16/shape_offset = Vector2( 0, -64 )
-16/shape_transform = Transform2D( 1, 0, 0, 1, 0, -64 )
+16/shape_offset = Vector2( 0, -96 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, -96 )
 16/shape = SubResource( 25 )
 16/shape_one_way = false
 16/shape_one_way_margin = 1.0
@@ -921,49 +921,49 @@ points = PoolVector2Array( 62.6085, 111.613, 66.6784, 109.287, 69.0041, 112.582,
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 25 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 26 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 4, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 27 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 5, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 28 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 29 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 3, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 30 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 7, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 31 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 }, {
 "autotile_coord": Vector2( 6, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 32 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -64 )
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -96 )
 } ]
 16/z_index = 0
 17/name = "Cliff_Corner_Outer"
