@@ -11,7 +11,7 @@ func _ready():
 func _on_Skill_gui_input(event, skill_slot):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		self.selected_slot = skill_slot
-		print(self.game.player.learned_skills.keys())
+		# print(self.game.player.learned_skills.keys())
 		for skill in self.game.player.learned_skills:
 			if self.selectable_skills.has(skill):
 				continue
@@ -41,7 +41,10 @@ func _on_Skill_mouse_exited():
 
 func _on_Skill_click(event, skill):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		self.game.player.action_bar_skills["Skill" + str(self.selected_slot + 1)] = skill
+		if skill == "NONE":
+			self.game.player.action_bar_skills["Skill" + str(self.selected_slot + 1)] = ""
+		else:
+			self.game.player.action_bar_skills["Skill" + str(self.selected_slot + 1)] = skill
 		self.game.ui.get_parent().load_shortcuts()
 		self.game.player.update_selected_skills()
 		self.visible = false

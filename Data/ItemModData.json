@@ -78,34 +78,6 @@
             0.19,
             0.23
           ]
-        },
-        {
-          "FlatHealth": [
-            "Flat",
-            10,
-            20
-          ]
-        },
-        {
-          "IncreasedHealth": [
-            "Add",
-            0.1,
-            0.2
-          ]
-        },
-        {
-          "FlatMana": [
-            "Flat",
-            10,
-            20
-          ]
-        },
-        {
-          "IncreasedMana": [
-            "Add",
-            0.1,
-            0.2
-          ]
         }
       ]
     },
@@ -133,14 +105,14 @@
       "Type": "Implicit",
       "ImplicitBaseItem": "Breastplate",
       "ItemLevel": 1,
-      "MainStat": "Intelligence",
-      "SecondaryStat": "Intelligence",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
       "Mods": [
         {
-          "LightningResistance": [
+          "Strength": [
             "Flat",
-            0.03,
-            0.07
+            5,
+            15
           ]
         }
       ]
@@ -310,6 +282,222 @@
             "Flat",
             5,
             15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 14,
+      "Name": "of the Penguin",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FrostResistance": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 15,
+      "Name": "of the Cat",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Dexterity",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "Dexterity": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 16,
+      "Name": "of the Troll",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Strength",
+      "SecondaryStat": "Dexterity",
+      "Mods": [
+        {
+          "HealthRegen": [
+            "Flat",
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 17,
+      "Name": "Cobalt",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FlatMana": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 18,
+      "Name": "Healthy",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "FlatHealth": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 19,
+      "Name": "Sapphire",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FlatMana": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 20,
+      "Name": "Robust",
+      "Type": "Prefix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "FlatHealth": [
+            "Flat",
+            5,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 21,
+      "Name": "of Snow",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Weapon",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FrostDamage": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 22,
+      "Name": "of Ice",
+      "Type": "Suffix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "FrostDamage": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 23,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Armour",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "IncreasedHealth": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 24,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Strength",
+      "SecondaryStat": "Strength",
+      "Mods": [
+        {
+          "IncreasedHealth": [
+            "Flat",
+            0.03,
+            0.07
+          ]
+        }
+      ]
+    },
+    {
+      "Id": 25,
+      "Name": "NONE",
+      "Type": "Affix",
+      "ItemLevel": 1,
+      "Slot": "Jewelry",
+      "MainStat": "Intelligence",
+      "SecondaryStat": "Intelligence",
+      "Mods": [
+        {
+          "ManaRegen": [
+            "Flat",
+            1,
+            3
           ]
         }
       ]

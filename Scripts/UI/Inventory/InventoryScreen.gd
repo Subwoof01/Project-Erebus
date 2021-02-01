@@ -114,7 +114,7 @@ func get_item_under_cursor(cursor_pos):
 	return item
 
 func drop_item():
-	ItemManager.spawn_item(self.game.player.global_position, self.item_held.data, 1)
+	ItemManager.spawn_item(self.game.player.global_position, 0, self.item_held.data, 1)
 	self.item_held.queue_free()
 	self.item_held = null
 	# Create in world item to fall on floor here.

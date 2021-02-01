@@ -7,11 +7,11 @@ enum STATE {
 	Casting,
 	Attacking,
 	Searching,
-	Dead
+	Dead,
+	Approaching
 }
 
 const ACCELERATION = 45
-const MAX_SPEED = 120
 
 
 onready var floating_text = preload("res://Scenes/UI/FloatingText.tscn")
@@ -26,8 +26,11 @@ onready var player = self.get_parent().get_node("Player")
 onready var nav_map: Navigation2D = self.get_parent().get_parent()
 onready var sight_range = $Sight
 onready var attack_range = $AttackRange
+onready var rng = RandomNumberGenerator.new()
 
 export var monster_name = ""
+export var MAX_SPEED = 80
+export var wanders = false
 export var max_health = 100
 export var level = 1
 export var base_exp = 100
@@ -74,14 +77,20 @@ func _process(delta):
 				self.destination = self.nav_map.get_closest_point(Mathf.randv_circle(self.sight_range.get_child(0).shape.radius * 0.5, self.sight_range.get_child(0).shape.radius))
 				self.state = STATE.Wandering
 		STATE.Wandering:
-			self.animation_mode.travel("Walking")
-			self.wander(delta)
+			if self.wanders:
+				self.animation_mode.travel("Walking")
+				self.wander(delta)
+			else:
+				self.state = STATE.Idle
 		STATE.Attacking:			
 			self.animation_tree.set("parameters/Idle/blend_position", self.global_position.direction_to(self.player.global_position).normalized())
 			self.attack()
 		STATE.Searching:
 			self.animation_mode.travel("Walking")
 			self.search(delta)
+		STATE.Approaching:
+			self.animation_mode.travel("Walking")
+			self.approach(delta)
 		
 func _physics_process(delta):
 	self.sight_check()
@@ -97,6 +106,8 @@ func sight_check():
 				self.destination = self.nav_map.get_closest_point(self.player.global_position)
 				if self.is_player_in_strike_range:
 					self.state = STATE.Attacking
+				else:
+					self.state = STATE.Approaching
 			else:
 				self.is_player_in_sight = false
 				if self.is_player_seen:
@@ -154,6 +165,17 @@ func move(delta) -> PoolVector2Array:
 
 	return path_to_destination
 
+func approach(delta):
+	if !self.is_player_in_sight:
+		self.state = STATE.Idle
+		return
+	if self.is_player_in_strike_range:
+		self.state = STATE.Attacking
+		return
+	var path = self.move(delta)
+	if path.size() == 0:
+		self.state = STATE.Idle
+
 func search(delta):
 	var path = self.move(delta)
 	if path.size() == 0:
@@ -172,20 +194,24 @@ func on_death():
 	self.is_player_in_range = false
 	self.sight_range.get_child(0).disabled = true
 	self.attack_range.get_child(0).disabled = true
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Collision/CollisionPolygon2D.set_deferred("disabled", true)
+	$CollisionPolygon2D.set_deferred("disabled", true)
+	$Collision/CollisionShape2D.set_deferred("disabled", true)
 	self.animation_mode.travel("Death")
 	self.player.gain_exp(self.base_exp, self.level)
+	self.rng.randomize()
+	var item_count = self.rng.randi_range(0, 3)
+	for i in item_count:
+		ItemManager.spawn_item(self.global_position, self.level)
 
 func on_hit(damage, type, crit=false):
 	for t in type:
 		if self.defensives.keys().has(t):
-			damage *= 1 - self.defensives[t]
-	self.current_health -= damage
+			damage["damage"] *= 1 - self.defensives[t]
+	self.current_health -= damage["damage"]
 	self.animation_mode.travel("Hit")
 	self.update_health_bar()
 	var text = self.floating_text.instance()
-	text.amount = damage
+	text.amount = damage["damage"]
 	text.is_crit = crit
 	self.add_child(text)
 	if (current_health <= 0):
@@ -205,3 +231,8 @@ func update_health_bar():
 	self.bar_tween.interpolate_property(self.health_bar, 'value', self.health_bar.value, percentage_hp, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	self.bar_tween.start()
 
+func _on_Collision_body_entered(body):
+	if body.is_in_group("SingleTargetSpell"):
+		self.on_hit(body.damage, body.damage_type, body.crit)
+		body.get_node("CollisionPolygon2D").disabled = true
+		body.hide()

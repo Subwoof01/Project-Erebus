@@ -7,6 +7,8 @@ export var cell_size = 64
 export var grid_width = 8
 export var grid_height = 4
 
+onready var amount_label_theme = preload("res://Resources/UI_Font_22.tres")
+
 func _ready():
 	for x in range(grid_width):
 		grid[x] = {}
@@ -80,11 +82,34 @@ func get_item_under_pos(pos):
 			return item
 	return null
 
+func increase_item_amount(item, amount):
+	if !item.data.stackable:
+		return
+	item.data.amount += amount
+	if len(item.get_children()) == 0:
+		var label = Label.new()
+		label.theme = self.amount_label_theme
+		label.text = str(item.data.amount)
+		label.rect_position = Vector2(0, 37)
+		label.rect_min_size = Vector2(58, 0)
+		label.align = Label.ALIGN_RIGHT
+		item.add_child(label)
+		return
+	item.get_child(0).text = str(item.data.amount)
+
 func insert_item_at_first_available_spot(item):
+	if item.data.stackable:
+		for i in self.items:
+			if i.data.item_name == item.data.item_name and i.data.amount + item.data.amount <= i.data.max_stack:
+				self.increase_item_amount(i, item.data.amount)
+				item.data.ui_sprite.queue_free()
+				return true
+		
 	for y in range(grid_height):
 		for x in range(grid_width):
 			if !grid[x][y]:
 				item.rect_global_position = rect_global_position + Vector2(x, y) * cell_size
 				if insert_item(item):
+					self.increase_item_amount(item, 0)
 					return true
 	return false

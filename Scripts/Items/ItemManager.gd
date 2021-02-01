@@ -9,10 +9,10 @@ onready var inventory = get_tree().get_root().get_node("Game/CanvasLayer/UI/Inve
 var world_items = []
 var alt_down = false
 
-func spawn_item(pos, item=null, spawn_radius=50):
+func spawn_item(pos, ilvl=1, item=null, spawn_radius=50):
 	if item == null:
 		var equipment = Equipment.new()
-		equipment.create_randomised_equipment(game.player.level)
+		equipment.create_randomised_equipment(ilvl)
 		item = equipment
 
 	if item.ui_sprite == null:
@@ -46,5 +46,3 @@ func pickup(item):
 		item.world_sprite.queue_free()
 	else:
 		self.spawn_item(self.game.player.global_position, item, 1)
-
-	print(str(len(self.world_items)))

@@ -1269,14 +1269,12 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
-frame = 3
 
 [node name="Head" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 offset = Vector2( 0, -32 )
 vframes = 8
 hframes = 32
-frame = 3
 
 [node name="Weapon" type="Sprite" parent="."]
 visible = false
@@ -1326,7 +1324,6 @@ parameters/Melee/blend_position = Vector2( 0, 0 )
 parameters/Walking/blend_position = Vector2( 0, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PoolVector2Array( -13.3333, 0, -10, -6.66667, 0, -10, 10, -6.66667, 13.3333, 0, 10, 6.66667, 0, 10, -10, 6.66667 )
 
 [node name="Center" type="Position2D" parent="."]
@@ -1346,6 +1343,7 @@ texture = ExtResource( 4 )
 [node name="MeleeTurnAxis" type="Node2D" parent="."]
 
 [node name="MeleeArea" type="Area2D" parent="MeleeTurnAxis"]
+visible = false
 position = Vector2( 32, 0 )
 collision_layer = 2
 collision_mask = 2
@@ -1357,7 +1355,7 @@ disabled = true
 [node name="InteractRange" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
-collision_mask = 2147483654
+collision_mask = 2147483670
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
 scale = Vector2( 1, 0.6 )

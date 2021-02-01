@@ -43,9 +43,11 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[node name="RangedSingleTargetSkill" type="RigidBody2D"]
+[node name="RangedSingleTargetSkill" type="RigidBody2D" groups=[
+"SingleTargetSpell",
+]]
 collision_layer = 8
-collision_mask = 2147483698
+collision_mask = 50
 mass = 0.00102041
 gravity_scale = 0.0
 contacts_reported = 1
@@ -62,5 +64,6 @@ polygon = PoolVector2Array( -8.18633, -4.42373, 13.5572, 1.94023, -8.36311, 8.12
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
 animation = "Ice_Spear"
+frame = 1
 playing = true
 [connection signal="body_entered" from="." to="." method="_on_Spell_body_entered"]

@@ -3,12 +3,13 @@ extends Control
 var item_type = ""
 var mod_types = []
 var game
-var equipment = load("res://Scripts/Items/Equipment.gd").new()
+var item = load("res://Scripts/Items/Item.gd").new()
 var rarity_colours = {
-	equipment.RARITY.Rare: "faff73",
-	equipment.RARITY.Magic: "aaa8ff",
-	equipment.RARITY.Normal: "ffffff"
+	item.RARITY.Rare: "faff73",
+	item.RARITY.Magic: "aaa8ff",
+	item.RARITY.Normal: "ffffff"
 }
+var last_mod: String = ""
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_alt"):
@@ -20,17 +21,27 @@ func _input(event):
 func _ready():
 	self.set_pos()
 
-func setup(item, game):
+func setup(_item, game):
 	self.game = game
 	self.set_pos()
-	self.set_item_name(item.data.equipment_name, Color(self.rarity_colours[item.data.rarity]))
-	self.set_item_type(item)
-	self.set_main_stat(item.data)
-	for mod in item.data.mods:
-		self.add_mod(mod, item.data)
-	self.set_requirements(item.data)
-	self.scale_tooltip()
+	self.set_item_name(_item.data.item_name, Color(self.rarity_colours[_item.data.rarity]))
+	self.set_item_type(_item)
 
+	if _item.data.type == "Equipment":
+		$Tooltip/VBoxContainer/MainStat.visible = true
+		$Tooltip/VBoxContainer/Requirements.visible = true
+		$Tooltip/VBoxContainer/Divider.visible = true
+		$Tooltip/VBoxContainer/Divider2.visible = true
+		self.set_main_stat(_item.data)
+		for mod in _item.data.mods:
+			self.add_mod(mod, _item.data)
+		self.set_requirements(_item.data)
+	else:
+		$Tooltip/VBoxContainer/MainStat.visible = true
+		var s = "[center]" + str(_item.data.amount) + "/" + str(_item.data.max_stack) + "[/center]"
+		$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
+
+	self.scale_tooltip()
 
 func show_mod_types():
 	for label in self.mod_types:
@@ -152,7 +163,6 @@ func add_mod(mod, list):
 	label.self_modulate = Color("9a94ee")
 	label.align = label.ALIGN_CENTER
 
-
 	if list.implicit.has(mod):
 		var label2 = RichTextLabel.new()
 		label2.theme = load("res://Resources/UI_Font_22.tres")
@@ -168,7 +178,7 @@ func add_mod(mod, list):
 		$Tooltip/VBoxContainer/Implicit.visible = true
 		return
 		
-	if list.prefix.has(mod):
+	if list.prefix.has(mod) and list.prefix[mod][0] != self.last_mod:
 		var label2 = RichTextLabel.new()
 		label2.theme = load("res://Resources/UI_Font_22.tres")
 		label2.self_modulate = Color("b9b9b9")
@@ -179,8 +189,9 @@ func add_mod(mod, list):
 			label2.visible = false
 		self.mod_types.append(label2)
 		$Tooltip/VBoxContainer.add_child(label2)
+		self.last_mod = list.prefix[mod][0]
 
-	if list.suffix.has(mod):
+	if list.suffix.has(mod) and list.suffix[mod][0] != self.last_mod:
 		var label2 = RichTextLabel.new()
 		label2.theme = load("res://Resources/UI_Font_22.tres")
 		label2.self_modulate = Color("b9b9b9")
@@ -191,8 +202,9 @@ func add_mod(mod, list):
 			label2.visible = false
 		self.mod_types.append(label2)
 		$Tooltip/VBoxContainer.add_child(label2)
+		self.last_mod = list.suffix[mod][0]
 
-	if list.affixes.has(mod):
+	if list.affixes.has(mod) and list.affixes[mod][0] != self.last_mod:
 		var label2 = RichTextLabel.new()
 		label2.theme = load("res://Resources/UI_Font_22.tres")
 		label2.self_modulate = Color("b9b9b9")
@@ -203,6 +215,7 @@ func add_mod(mod, list):
 			label2.visible = false
 		self.mod_types.append(label2)
 		$Tooltip/VBoxContainer.add_child(label2)
+		self.last_mod = list.affixes[mod][0]
 
 	label.text = self.find_mod_text(mod, list)
 
@@ -229,24 +242,28 @@ func set_item_type(item):
 	if !game.alt_pressed:
 		$Tooltip/VBoxContainer/ItemLevel.visible = false
 	$Tooltip/VBoxContainer/ItemLevel.text = "Item Level: " + str(item.data.level)
-	if item.data.type == "Weapon":
-		$Tooltip/VBoxContainer/Type.text = "Two Handed " if item.data.is_two_handed else "One Handed " + item.data.sub_type
+	if item.data.type == "Equipment":
+		if item.data.equipment_type == "Weapon":
+			$Tooltip/VBoxContainer/Type.text = "Two Handed " if item.data.is_two_handed else "One Handed " + item.data.sub_type
+		else:
+			$Tooltip/VBoxContainer/Type.text = item.data.sub_type
+		self.item_type = item.data.equipment_type
 	else:
-		$Tooltip/VBoxContainer/Type.text = item.data.sub_type
-	self.item_type = item.data.type
+		$Tooltip/VBoxContainer/Type.text = item.data.type
 
 func set_main_stat(item, type_=self.item_type):
-	match type_:
-		"Weapon":
-			var s = "[center]Physical Damage: " + ("[color=#9a94ee]" if item.mods.has("EnhancedDamage") else "[color=#ffffff]") + str(round(item.stats["PhysicalDamageMin"].value)) + "-" + str(round(item.stats["PhysicalDamageMax"].value)) + "[/color][/center]"
-			$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
-		"Armour":
-			var s = "[center]Armour: " + ("[color=#9a94ee]" if item.mods.has("EnhancedArmour") else "[color=#ffffff]") + str(round(item.stats["Armour"].value)) + "[/color][/center]"
-			$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
-		"Shield":
-			var s = "[center]Block Chance: " + ("[color=#9a94ee]" if item.mods.has("BlockChance") else "[color=#ffffff]") + str(round(item.stats["BlockChance"].value * 100)) + "%[/color][/center]"
-			$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
-		_:
-			var main_stat = $Tooltip/VBoxContainer/MainStat
-			$Tooltip/VBoxContainer.remove_child(main_stat)
-			main_stat.free()
+	if item.type == "Equipment":
+		match item.equipment_type:
+			"Weapon":
+				var s = "[center]Physical Damage: " + ("[color=#9a94ee]" if item.mods.has("EnhancedDamage") else "[color=#ffffff]") + str(round(item.stats["PhysicalDamageMin"].value)) + "-" + str(round(item.stats["PhysicalDamageMax"].value)) + "[/color][/center]"
+				$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
+			"Armour":
+				var s = "[center]Armour: " + ("[color=#9a94ee]" if item.mods.has("EnhancedArmour") else "[color=#ffffff]") + str(round(item.stats["Armour"].value)) + "[/color][/center]"
+				$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
+			"Shield":
+				var s = "[center]Block Chance: " + ("[color=#9a94ee]" if item.mods.has("BlockChance") else "[color=#ffffff]") + str(round(item.stats["BlockChance"].value * 100)) + "%[/color][/center]"
+				$Tooltip/VBoxContainer/MainStat.parse_bbcode(s)
+			_:
+				var main_stat = $Tooltip/VBoxContainer/MainStat
+				$Tooltip/VBoxContainer.remove_child(main_stat)
+				main_stat.free()

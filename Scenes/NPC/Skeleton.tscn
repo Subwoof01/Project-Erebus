@@ -1114,8 +1114,8 @@ radius = 400.0
 [node name="Skeleton" type="KinematicBody2D" groups=[
 "Enemies",
 ]]
-collision_layer = 2147483664
-collision_mask = 16
+collision_layer = 4
+collision_mask = 39
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -1123,7 +1123,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 32
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Cast_Bottom = SubResource( 1 )
@@ -1187,19 +1187,22 @@ parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Melee/blend_position = Vector2( 0, 0 )
 parameters/Walking/blend_position = Vector2( 0, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
+polygon = PoolVector2Array( -16, 0, -12, -6, 0, -8, 12, -6, 16, 0, 12, 8, 0, 10, -12, 8 )
+
+[node name="Collision" type="Area2D" parent="." groups=[
+"Enemies",
+]]
+visible = false
+collision_layer = 2147483664
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 show_behind_parent = true
 position = Vector2( 0, -16 )
 z_index = 1
 shape = SubResource( 118 )
-
-[node name="Collision" type="StaticBody2D" parent="."]
-collision_layer = 2147483652
-collision_mask = 35
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
-polygon = PoolVector2Array( -16, 0, -12, -6, 0, -8, 12, -6, 16, 0, 12, 8, 0, 10, -12, 8 )
 
 [node name="HealthBar" type="TextureProgress" parent="."]
 visible = false
@@ -1231,6 +1234,7 @@ scale = Vector2( 1, 0.6 )
 shape = SubResource( 119 )
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 show_behind_parent = true
 collision_layer = 0
 collision_mask = 2
@@ -1240,6 +1244,7 @@ scale = Vector2( 1, 0.6 )
 shape = SubResource( 120 )
 
 [node name="TurnAxis" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -12 )
 
 [node name="CastPoint" type="Position2D" parent="TurnAxis"]
@@ -1251,7 +1256,9 @@ scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 6 )
 
 [node name="Center" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -12 )
+[connection signal="body_entered" from="Collision" to="." method="_on_Collision_body_entered"]
 [connection signal="body_entered" from="Sight" to="." method="_on_Sight_body_entered"]
 [connection signal="body_exited" from="Sight" to="." method="_on_Sight_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_StrikeRange_body_entered"]
