@@ -32,27 +32,27 @@
 [ext_resource path="res://Sprites/UI/Main/Circle_X.png" type="Texture" id=30]
 [ext_resource path="res://Scripts/UI/DeathScreen.gd" type="Script" id=31]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 28
 use_filter = true
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 38
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 24 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 0.392157 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 128
 use_filter = true
 font_data = ExtResource( 24 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 72
 use_filter = true
 font_data = ExtResource( 24 )
@@ -250,7 +250,7 @@ margin_left = 3453.86
 margin_top = -3579.59
 margin_right = 4007.86
 margin_bottom = -3450.59
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "Thanks for playing the demo!
 Please leave your feedback on the form. 
 If you have specific feedback that doesn't fit the form, 
@@ -792,7 +792,7 @@ margin_left = -94.5
 margin_top = -42.0
 margin_right = 94.5
 margin_bottom = -2.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Enemy_Name"
 align = 1
@@ -829,7 +829,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 31 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -838,7 +838,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="CanvasLayer/UI/DeathScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "YOU DIED"
 align = 1
 valign = 1
@@ -846,7 +846,7 @@ valign = 1
 [node name="Label2" type="Label" parent="CanvasLayer/UI/DeathScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "
 
 

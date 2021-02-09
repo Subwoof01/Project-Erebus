@@ -48,7 +48,13 @@ func _ready():
 	self.update_info()
 
 func update_info():
+	self.selector.visible = false
+	if self.current_skill_tooltip != null:
+		self.current_skill_tooltip.queue_free()
+		self.current_skill_tooltip = null
 	self.ability_essences.text = str(self.player.ability_essences)
+	for child in $KnownSkillList/VBoxContainer.get_children():
+		child.queue_free()
 
 	for skill in self.player.learned_skills:
 		var exists = false

@@ -70,7 +70,7 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_space"):
 		self.skill_screen.visible = false
 		self.inventory_window.visible = false
-		self.skill_screen.visible = false
+		self.char_window.visible = false
 
 	if Input.is_action_just_pressed("ui_alt"):
 		self.alt_pressed = true
